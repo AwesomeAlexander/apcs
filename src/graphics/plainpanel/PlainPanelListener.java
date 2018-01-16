@@ -1,27 +1,24 @@
 package graphics.plainpanel;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import utils.Drawable;
 import graphics.drawings.*;
 
-public class PlainPanelListener implements MouseListener {
+public class PlainPanelListener extends MouseAdapter {
 
-	FramedPanel panel;
+	private FramedPanel panel;
 
 	public PlainPanelListener(FramedPanel generator) {
 		this.panel = generator;
 		this.panel.addMouseListener(this);
+		this.panel.addMouseMotionListener(this);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("u did a thing");
 
 		int x = e.getX();
 		int y = e.getY();
@@ -56,22 +53,7 @@ public class PlainPanelListener implements MouseListener {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// Nothing
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// Nothing
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// Nothing
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseDragged(MouseEvent e) {
 		// Nothing
 	}
 }

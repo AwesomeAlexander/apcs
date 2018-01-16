@@ -2,6 +2,7 @@ package graphics.plainpanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class FramedPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		g.setColor(this.color);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.setColor(Color.WHITE);

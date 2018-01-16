@@ -28,4 +28,9 @@ public class InteractivePanel extends JPanel {
 		this.drawnObjects.add(obj);
 		counter++;
 	}
+
+	public void removeDrawnObj(Drawable obj) {
+		this.drawnObjects.remove(obj);
+		counter--;
+	}
 }
