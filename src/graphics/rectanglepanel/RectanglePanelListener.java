@@ -5,10 +5,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JPanel;
-
-import utils.Drawable;
-import graphics.drawings.*;
+import graphics.drawings.Rect;
 
 public class RectanglePanelListener extends MouseAdapter {
 
