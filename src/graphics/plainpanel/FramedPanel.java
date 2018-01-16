@@ -9,7 +9,7 @@ import utils.Drawable;
 
 public class FramedPanel extends JPanel {
 	private Color color;
-	ArrayList<Drawable> drawnObjects;
+	ArrayList<Drawable> drawnObjects; 
 	
 	public FramedPanel(Color c) {
 		this.color = c;
