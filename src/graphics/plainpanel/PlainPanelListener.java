@@ -13,8 +13,6 @@ import graphics.drawings.*;
 public class PlainPanelListener extends MouseAdapter {
 
 	private FramedPanel panel;
-	Drawable selectedObj;
-	Point offset;
 
 	public PlainPanelListener(FramedPanel generator) {
 		this.panel = generator;
@@ -24,26 +22,18 @@ public class PlainPanelListener extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+
+		if(e.isControlDown()) {
+			this.panel.clearDrawn();
+			return;
+		}
+		
 		Color c = e.isAltDown() ? Color.BLUE : Color.RED;
 		Drawable d = e.isShiftDown() ? new Ellipse(e.getX(), e.getY(), 30, 30, c) : new Rect(e.getX(), e.getY(), 30, 30, c);
 
 		this.panel.addDrawnObj(d);
-		
-		if(e.isControlDown()) {
-			this.panel.clearDrawn();
-		}
 
 		this.panel.repaint();
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		this.selectedObj = 
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
 		
 	}
 }
