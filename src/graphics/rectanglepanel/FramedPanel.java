@@ -34,10 +34,10 @@ public class FramedPanel extends JPanel {
 		}
 	}
 
-	public void addDrawnObj(Drawable obj) {
+	public void addDrawnObj(Rect obj) {
 		this.drawnObjects.add(obj);
 	}
-	public void removeDrawnObj(Drawable obj) {
+	public void removeDrawnObj(Rect obj) {
 		this.drawnObjects.remove(obj);
 	}
 
@@ -49,5 +49,6 @@ public class FramedPanel extends JPanel {
 		for (Rect r : this.drawnObjects) {
 			if (r.containsPoint(p)) return r;
 		}
+		return null;
 	}
 }
