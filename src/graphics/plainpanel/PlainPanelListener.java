@@ -13,7 +13,7 @@ import graphics.drawings.*;
 public class PlainPanelListener extends MouseAdapter {
 
 	private FramedPanel panel;
-	Drawable obj;
+	Drawable selectedObj;
 	Point offset;
 
 	public PlainPanelListener(FramedPanel generator) {
@@ -35,6 +35,11 @@ public class PlainPanelListener extends MouseAdapter {
 
 		this.panel.repaint();
 		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		this.selectedObj = 
 	}
 
 	@Override
