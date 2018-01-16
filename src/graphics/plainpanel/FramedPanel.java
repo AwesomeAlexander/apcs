@@ -36,6 +36,9 @@ public class FramedPanel extends JPanel {
 	public void addDrawnObj(Drawable obj) {
 		this.drawnObjects.add(obj);
 	}
+	public void removeDrawnObj(Drawable obj) {
+		this.drawnObjects.remove(obj);
+	}
 
 	public void clearDrawn() {
 		this.drawnObjects = new ArrayList<Drawable>();

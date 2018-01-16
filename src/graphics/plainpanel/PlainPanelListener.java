@@ -1,8 +1,11 @@
 package graphics.plainpanel;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JPanel;
 
 import utils.Drawable;
 import graphics.drawings.*;
@@ -10,6 +13,8 @@ import graphics.drawings.*;
 public class PlainPanelListener extends MouseAdapter {
 
 	private FramedPanel panel;
+	Drawable obj;
+	Point offset;
 
 	public PlainPanelListener(FramedPanel generator) {
 		this.panel = generator;
@@ -19,28 +24,8 @@ public class PlainPanelListener extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-		int x = e.getX();
-		int y = e.getY();
-		Color c; 
-		Drawable d;
-		
-		if(e.isMetaDown()) {
-			c = Color.RED;
-			d = new Ellipse(x, y, 30, 30, c);
-		}
-		else if(e.isAltDown()) {
-			c = Color.BLUE;
-			d = new Ellipse(x, y, 30, 30, c);
-		}
-		else if(e.isShiftDown()) {
-			c = Color.BLUE;
-			d = new Rect(x, y, 30, 30, c);
-		}
-		else{
-			c = Color.RED;
-			d = new Rect(x, y, 30, 30, c);
-		}
+		Color c = e.isAltDown() ? Color.BLUE : Color.RED;
+		Drawable d = e.isShiftDown() ? new Ellipse(e.getX(), e.getY(), 30, 30, c) : new Rect(e.getX(), e.getY(), 30, 30, c);
 
 		this.panel.addDrawnObj(d);
 		
@@ -54,6 +39,6 @@ public class PlainPanelListener extends MouseAdapter {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// Nothing
+		
 	}
 }
