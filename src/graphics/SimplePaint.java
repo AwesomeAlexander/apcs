@@ -180,11 +180,10 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
             			//  Clicked on "CLEAR".
 					  this.lines = new ArrayList<Line>();
 					  // this.lines.clear();
-            }
-            else {
+            } else {
                 changeColor(y);
-                repaint();
-            }
+			}
+			repaint();
         } else if (x > 3 && x < width - 56 && y > 3 && y < height - 3) {
             // Save x,y
             this.prev = new Point(x,y);

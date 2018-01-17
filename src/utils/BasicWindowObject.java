@@ -1,9 +1,6 @@
 package utils;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
-
-import javax.swing.JPanel;
 
 /**
  * A basic abstract object with some basic constructors and basic methods
@@ -11,20 +8,19 @@ import javax.swing.JPanel;
  * @author Alexander Ng
  *
  */
-public abstract class BasicObject {
+public abstract class BasicWindowObject {
 
 	// Variables
 	protected int x, y, size, r, b, g, sx, sy;
 	protected double speed, direction;
-	protected Color color;
-	protected JPanel parent;
+	protected String color;
 
 	// Constructors
 
 	/**
 	 * Basic Constructor
 	 */
-	public BasicObject() {
+	public BasicWindowObject() {
 
 	}
 
@@ -36,7 +32,7 @@ public abstract class BasicObject {
 	 * @param y
 	 *            - initial y position, Integer
 	 */
-	public BasicObject(int x, int y) {
+	public BasicWindowObject(int x, int y) {
 		this(x,y,10);
 	}
 
@@ -50,7 +46,7 @@ public abstract class BasicObject {
 	 * @param size
 	 *            - initial size, Integer
 	 */
-	public BasicObject(int x, int y, int size) {
+	public BasicWindowObject(int x, int y, int size) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
@@ -66,7 +62,7 @@ public abstract class BasicObject {
 	 * @param speed
 	 *            - initial speed, double
 	 */
-	public BasicObject(int x, int y, double speed) {
+	public BasicWindowObject(int x, int y, double speed) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -84,7 +80,7 @@ public abstract class BasicObject {
 	 * @param direction
 	 *            - initial direction, double
 	 */
-	public BasicObject(int x, int y, double speed, double direction) {
+	public BasicWindowObject(int x, int y, double speed, double direction) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -103,7 +99,7 @@ public abstract class BasicObject {
 	 * @param size
 	 *            - initial size, Integer
 	 */
-	public BasicObject(int x, int y, double speed, int size) {
+	public BasicWindowObject(int x, int y, double speed, int size) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -122,7 +118,7 @@ public abstract class BasicObject {
 	 * @param sy
 	 *            - initial y speed, Integer
 	 */
-	public BasicObject(int x, int y, int sx, int sy) {
+	public BasicWindowObject(int x, int y, int sx, int sy) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -143,7 +139,7 @@ public abstract class BasicObject {
 	 * @param size
 	 *            - initial size, Integer
 	 */
-	public BasicObject(int x, int y, int sx, int sy, int size) {
+	public BasicWindowObject(int x, int y, int sx, int sy, int size) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -165,7 +161,7 @@ public abstract class BasicObject {
 	 * @param color
 	 *            - initial color, String
 	 */
-	public BasicObject(int x, int y, int sx, int sy, Color color) {
+	public BasicWindowObject(int x, int y, int sx, int sy, String color) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -191,7 +187,7 @@ public abstract class BasicObject {
 	 * @param g
 	 *            - initial green value, Integer 0-255
 	 */
-	public BasicObject(int x, int y, int sx, int sy, int r, int b, int g) {
+	public BasicWindowObject(int x, int y, int sx, int sy, int r, int b, int g) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -206,7 +202,7 @@ public abstract class BasicObject {
 	/**
 	 * Draws the object
 	 */
-	public abstract void draw(Graphics g);
+	public abstract void draw();
 
 	/**
 	 * Moves the object
@@ -220,7 +216,7 @@ public abstract class BasicObject {
 	 */
 	public void update() {
 		this.move();
-		this.parent.repaint();
+		this.draw();
 	}
 
 	/**
@@ -317,7 +313,7 @@ public abstract class BasicObject {
 	 *            - the other object
 	 * @return - Angle in radians from this object
 	 */
-	public double angleto(BasicObject other) {
+	public double angleto(BasicWindowObject other) {
 		return Math.atan2(this.y - other.y, this.x - other.x);
 	}
 
@@ -341,18 +337,18 @@ public abstract class BasicObject {
 	 *            - the other object
 	 * @return - Distance from this object
 	 */
-	public double distanceto(BasicObject other) {
+	public double distanceto(BasicWindowObject other) {
 		return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
 	}
 	
 	/**
-	 * Gives the closest of an ArrayList of BasicObjects
+	 * Gives the closest of an ArrayList of BasicWindowObjects
 	 * @param list - ArrayList of basic objects
 	 * @return - the closest object
 	 */
-	public BasicObject closest(ArrayList<BasicObject> list) {
-		BasicObject closest = list.get(0);
-		for (BasicObject thing : list) {
+	public BasicWindowObject closest(ArrayList<BasicWindowObject> list) {
+		BasicWindowObject closest = list.get(0);
+		for (BasicWindowObject thing : list) {
 			if (this.distanceto(thing) < this.distanceto(closest)) {
 				closest = thing;
 			}
@@ -361,13 +357,13 @@ public abstract class BasicObject {
 	}
 	
 	/**
-	 * Gives the closest of an Array of BasicObjects
+	 * Gives the closest of an Array of BasicWindowObjects
 	 * @param list - Array of basic objects
 	 * @return - the closest object
 	 */
-	public BasicObject closest(BasicObject[] list) {
-		BasicObject closest = list[0];
-		for (BasicObject thing : list) {
+	public BasicWindowObject closest(BasicWindowObject[] list) {
+		BasicWindowObject closest = list[0];
+		for (BasicWindowObject thing : list) {
 			if (this.distanceto(thing) < this.distanceto(closest)) {
 				closest = thing;
 			}
@@ -391,15 +387,15 @@ public abstract class BasicObject {
 		return this.sy;
 	}
 
-	public double getSpeed() {
+	public double getSPEED() {
 		return this.speed;
 	}
 
-	public double getDirection() {
+	public double getDIRECTION() {
 		return this.direction;
 	}
 
-	public int getSize() {
+	public int getSIZE() {
 		return this.size;
 	}
 
@@ -415,7 +411,7 @@ public abstract class BasicObject {
 		return this.b;
 	}
 
-	public String getColor() {
+	public String getCOLOR() {
 		return this.color;
 	}
 }
