@@ -1,44 +1,46 @@
-package graphics.plainpanel;
+package graphics.rectanglepanel;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
-import java.awt.*;
+import graphics.drawings.*;
+import utils.Drawable;
 
-// This is the specification for the custom container panel 
-// that will be added to the JFrame object 'window'
 public class RectanglePanel extends JPanel {
 
 	public RectanglePanel() {
-		// Set current object's layout
-		this.setLayout(new BorderLayout());
-		
-		FramedPanel upper = new FramedPanel(Color.RED);
-		new RectanglePanelListener(upper);
-		
-		// south will hold the other 2 JPanel objects
-		// (no need to create custom JPanel class for this)
-		JPanel lower = new JPanel();
-		lower.setLayout(new GridLayout(2,1));
-		
-		// A JPanel object is a container that can hold other containers 
-		// so 'south' will contain 2 other JPanel objects.
-		JPanel lowerUP = new JPanel();
-		JPanel lowerDOWN = new JPanel();
-		
-		// Set correct layout
-		lowerUP.setLayout(new GridLayout(1,2));
-		lowerDOWN.setLayout(new GridLayout(1,1));
-		
-		// Syntax: container.add(component)
-		lowerUP.add(new JButton("Previous"));
-		lowerUP.add(new JButton("Next"));
-		
-		lowerDOWN.add(new JButton("Submit"));
-		
-		lower.add(lowerUP);
-		lower.add(lowerDOWN);
+		super();
+		new RectanglePanelListener(this);
+	}
+	
+	ArrayList<Rect> drawnObjects = new ArrayList<Rect>();
 
-		this.add(upper,BorderLayout.CENTER);
-		this.add(lower,BorderLayout.SOUTH);
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        for (Rect d : this.drawnObjects) {
+			d.draw(g);
+		}
+	}
+	
+	public void addDrawnObj(Rect obj) {
+		this.drawnObjects.add(obj);
 	}
 
+	public void removeDrawnObj(Drawable obj) {
+		this.drawnObjects.remove(obj);
+	}
+
+	public void clearDrawn() {
+		this.drawnObjects = new ArrayList<Rect>();
+	}
+
+	public Rect containsPoint(Point p) {
+		for (Rect r : this.drawnObjects) {
+			if (r.containsPoint(p)) return r;
+		}
+		return null;
+	}
 }

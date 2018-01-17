@@ -9,11 +9,11 @@ import graphics.drawings.Rect;
 
 public class RectanglePanelListener extends MouseAdapter {
 
-	private FramedPanel panel;
+	private RectanglePanel panel;
 	Rect selectedObj;
 	Point offset;
 
-	public RectanglePanelListener(FramedPanel generator) {
+	public RectanglePanelListener(RectanglePanel generator) {
 		this.panel = generator;
 		this.panel.addMouseListener(this);
 		this.panel.addMouseMotionListener(this);
@@ -44,6 +44,7 @@ public class RectanglePanelListener extends MouseAdapter {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		if (this.selectedObj == null) return;
 		this.selectedObj.x = e.getX() - this.offset.x;
 		this.selectedObj.y = e.getY() - this.offset.y;
 		this.panel.repaint();
