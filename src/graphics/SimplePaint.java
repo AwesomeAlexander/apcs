@@ -2,8 +2,6 @@ package graphics;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.awt.geom.Line2D.Double;
 import java.util.ArrayList;
 
@@ -180,7 +178,8 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
         if (x > width - 53) {
             if (y > height - 53) {
             			//  Clicked on "CLEAR".
-                      this.lines = new ArrayList<Line>();
+					  this.lines = new ArrayList<Line>();
+					  // this.lines.clear();
             }
             else {
                 changeColor(y);
