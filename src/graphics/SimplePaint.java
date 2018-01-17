@@ -43,16 +43,18 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
     /* The following variables are used when the user is sketching a
          curve while dragging a mouse. */
 
-    private Point prev;     // The previous location of the mouse.
-    private boolean dragging;      // This is set to true while the user is drawing.
-
+    private Point prev;
+    private boolean dragging;
     
 	class Line extends Double {
-		public Line(int x1,int y1,int x2,int y2) {
+        Color c;
+		public Line(int x1,int y1,int x2,int y2,Color c) {
 			super();
-			this.setLine(x1, y1, x2, y2);
+            this.setLine(x1, y1, x2, y2);
+            this.c = c;
 		}
 		public void draw(Graphics g) {
+            g.setColor(c);
 			g.drawLine((int)x1, (int)y1, (int)x2, (int)y2);
 		}
 	}
@@ -136,13 +138,28 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
     private void changeColor(int y) {
         int colorSpacing = (getHeight() - 56) / 7;  // Space for one color rectangle.
         int newColor = y / colorSpacing;       // Which color number was clicked?
-        System.out.println("y: " + y + " colorSpacing: " + colorSpacing + " newColor: " + newColor);
+        // System.out.println("y: " + y + " colorSpacing: " + colorSpacing + " newColor: " + newColor);
 
         if (newColor < 0 || newColor > 6)      // Make sure the color number is valid.
             return;
 
         currentColor = newColor;
-    } 
+    }
+
+    private Color getColor(int c) {
+        switch (c) {
+            case BLACK: return Color.BLACK;
+            case RED: return Color.RED;
+            case GREEN: return Color.GREEN;
+            case BLUE: return Color.BLUE;
+            case CYAN: return Color.CYAN;
+            case MAGENTA: return Color.MAGENTA;
+            case YELLOW: return Color.YELLOW;
+            default:
+                System.out.println("You Failed at colors!");
+                return null;
+        }
+    }
 
 
     /**
@@ -158,26 +175,20 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
         int width = getWidth();    // Width of the panel.
         int height = getHeight();  // Height of the panel.
 
-        if (dragging == true)  // Ignore mouse presses that occur
-            return;            //    when user is already drawing a curve.
-                               //    (This can happen if the user presses
-                               //    two mouse buttons at the same time.)
-									//***like left button is down+dragging but you click the right button
+        if (dragging == true) return; // The only real use for this variable...
+
         if (x > width - 53) {
             if (y > height - 53) {
-            			//  ***Clicked on "CLEAR button".
-                      
+            			//  Clicked on "CLEAR".
+                      this.lines = new ArrayList<Line>();
             }
             else {
-                changeColor(y);  // Clicked on the color palette.
-                 				// ***update the highlighted square of color
+                changeColor(y);
+                repaint();
             }
-        }
-        else if (x > 3 && x < width - 56 && y > 3 && y < height - 3) {
-                // The user has clicked on the white drawing area.
-                // Start drawing a curve from the point (x,y).
-            
-        	
+        } else if (x > 3 && x < width - 56 && y > 3 && y < height - 3) {
+            // Save x,y
+            this.prev = new Point(x,y);
         }
 
     } // end mousePressed()
@@ -190,7 +201,8 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent evt) {
         if (dragging == false)
         		return; // Nothing to do because the user isn't drawing.
-        dragging = false;
+        dragging = false;;
+        this.prev = null;
     }
 
 
@@ -203,17 +215,16 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
      * palette or clear button.
      */
     public void mouseDragged(MouseEvent evt) {
-        if (dragging == false) return;
+        dragging = true;
 
-        int x = Math.max(3,Math.min(getWidth()-4,evt.getX()));
-		int y = Math.max(3,Math.min(getHeight()-4,evt.getY()));
+        int x = Math.max(3,Math.min(getWidth()-56,evt.getX()));
+		int y = Math.max(3,Math.min(getHeight()-3,evt.getY()));
 		
-		
-		if (this.prev != null)
-			this.lines.add(new Line(this.prev.x,this.prev.y,x,y));
-		this.prev = new Point(x,y);
+        if (this.prev != null)
+		    this.lines.add(new Line(this.prev.x,this.prev.y,x,y,this.getColor(this.currentColor)));
+        this.prev = new Point(x,y);
         
-
+        repaint();
     } // end mouseDragged()
 
 
