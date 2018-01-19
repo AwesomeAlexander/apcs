@@ -1,4 +1,4 @@
-package graphics;
+package graphics.simplepaint;
 
 import java.awt.*;
 import java.awt.event.*;

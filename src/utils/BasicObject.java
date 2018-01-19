@@ -1,6 +1,7 @@
 package utils;
 
 import java.awt.Graphics;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
