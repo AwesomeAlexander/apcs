@@ -16,5 +16,6 @@ public class Main {
         window.setContentPane(content);
     
 		window.setVisible(true);
+		window.setResizable(false); // don't want resizeability
 	}
 }
