@@ -27,7 +27,25 @@ public class SubKillerListener implements FocusListener,KeyListener,/*MouseListe
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_A:;
+			case KeyEvent.VK_LEFT:
+				this.panel.boat.movexy(10,0);
+				break;
+			case KeyEvent.VK_D:;
+			case KeyEvent.VK_RIGHT:
+				this.panel.boat.movexy(10,0);
+				break;
+			case KeyEvent.VK_S:;
+			case KeyEvent.VK_DOWN:;
+			case KeyEvent.VK_SPACE:
+				this.panel.bombs.add(new Bomb(
+					this.panel.boat.getX(),
+					this.panel.boat.getY()));
+				break;
+			default:
+				break;
+		}
 	}
 	
 	@Override

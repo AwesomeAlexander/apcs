@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- * A basic abstract object with some basic constructors and basic methods
+ * A basic abstract object with some basic constructors and basic methods.
+ * Intended for use in conjunction with the {@link javax.swing} elements
  * 
  * @author Alexander Ng
  *
