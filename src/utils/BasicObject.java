@@ -417,7 +417,7 @@ public abstract class BasicObject {
 		return this.b;
 	}
 
-	public String getColor() {
+	public Color getColor() {
 		return this.color;
 	}
 }
