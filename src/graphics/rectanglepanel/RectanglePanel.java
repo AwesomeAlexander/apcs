@@ -8,6 +8,7 @@ import graphics.drawings.*;
 import utils.Drawable;
 
 public class RectanglePanel extends JPanel {
+	static final long serialVersionUID = 42L;
 
 	public RectanglePanel() {
 		super();

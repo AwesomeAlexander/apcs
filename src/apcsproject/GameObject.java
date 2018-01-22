@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import utils.*;
 
-public abstract class GameObject extends BasicObject {
+public abstract class GameObject extends BasicWindowObject {
 	
 	/***** Variables *****/
 	

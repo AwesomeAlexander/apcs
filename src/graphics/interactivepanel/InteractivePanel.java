@@ -4,10 +4,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import graphics.drawings.*;
 import utils.Drawable;
 
 public class InteractivePanel extends JPanel {
+	static final long serialVersionUID = 42L;
 	
 	int counter = 0;
 	ArrayList<Drawable> drawnObjects = new ArrayList<Drawable>();

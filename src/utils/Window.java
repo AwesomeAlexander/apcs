@@ -1933,8 +1933,8 @@ public class Window extends JApplet {
 	 * Draws a list of BasicObjects
 	 * @param basicObjects - list of BasicObjects
 	 */
-	public static void draw(BasicObject ... basicObjects) {
-		for (BasicObject n : basicObjects) {
+	public static void draw(BasicWindowObject ... basicObjects) {
+		for (BasicWindowObject n : basicObjects) {
 			n.draw();
 		}
 	}
@@ -1943,8 +1943,8 @@ public class Window extends JApplet {
 	 * Moves a list of BasicObjects
 	 * @param basicObjects - list of BasicObjects
 	 */
-	public static void move(BasicObject ... basicObjects) {
-		for (BasicObject n : basicObjects) {
+	public static void move(BasicWindowObject ... basicObjects) {
+		for (BasicWindowObject n : basicObjects) {
 			n.move();
 		}
 	}
@@ -1953,8 +1953,8 @@ public class Window extends JApplet {
 	 * Updates a list of BasicObjects, default draw and move
 	 * @param basicObjects - list of BasicObjects
 	 */
-	public static void update(BasicObject ... basicObjects) {
-		for (BasicObject n : basicObjects) {
+	public static void update(BasicWindowObject ... basicObjects) {
+		for (BasicWindowObject n : basicObjects) {
 			n.update();
 		}
 	}

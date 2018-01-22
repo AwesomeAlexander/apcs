@@ -1,7 +1,5 @@
 package apcsproject;
 
-import utils.*;
-
 public class PlayerAI extends Player {
 	
 	String[] controls;

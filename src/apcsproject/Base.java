@@ -43,7 +43,7 @@ public class Base extends Building {
 	
 	@Override
 	public void setKeys(Map<String, Runnable> keys) {
-		keys.put("1",()->{this.owner.makeUnit(this);});
+		keys.put("1",()->{this.owner.makeUnit(this,this.spawnprice);});
 		keys.put("2",()->{
 			if (this.spawncooldown < 100) {
 				System.out.println("You've hit minimum spawn rate!");

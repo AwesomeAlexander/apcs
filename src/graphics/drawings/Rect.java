@@ -7,6 +7,8 @@ import java.awt.Rectangle;
 import utils.Drawable;
 
 public class Rect extends Rectangle implements Drawable {
+	static final long serialVersionUID = 42L;
+	
 	public Color color;
 
 	public Rect(int x,int y) {

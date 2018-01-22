@@ -1,10 +1,9 @@
 package apcsproject;
 
 import java.util.*;
-import java.util.concurrent.Callable;
 import utils.*;
 
-public class Player extends BasicObject {
+public class Player extends BasicWindowObject {
 	
 	/***** Variables *****/
 	

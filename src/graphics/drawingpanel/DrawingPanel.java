@@ -5,6 +5,7 @@ import javax.swing.*;
 import graphics.drawings.*;
 
 public class DrawingPanel extends JPanel {
+    static final long serialVersionUID = 42L;
 	
 	int counter = 0;
 	Rect[] rectangles = new Rect[20000];

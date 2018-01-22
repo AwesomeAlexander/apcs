@@ -9,7 +9,8 @@ import javax.swing.*;
 
 
 public class SimplePaint extends JPanel implements MouseListener, MouseMotionListener {
-
+    static final long serialVersionUID = 42L;
+    
     /**
      * This main routine allows this class to be run as a program.
      */
@@ -45,6 +46,8 @@ public class SimplePaint extends JPanel implements MouseListener, MouseMotionLis
     private boolean dragging;
     
 	class Line extends Double {
+        static final long serialVersionUID = 42L;
+
         Color c;
 		public Line(int x1,int y1,int x2,int y2,Color c) {
 			super();

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
  * SubKillerPanel
  */
 public class SubKillerPanel extends JPanel {
+	static final long serialVersionUID = 42L;
 
 	Timer timer;
 

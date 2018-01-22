@@ -6,6 +6,7 @@ import java.awt.*;
 // This is the specification for the custom container panel 
 // that will be added to the JFrame object 'window'
 public class PlainPanel extends JPanel {
+	static final long serialVersionUID = 42L;
 
 	public PlainPanel() {
 		// Set current object's layout

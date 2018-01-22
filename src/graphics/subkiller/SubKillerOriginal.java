@@ -15,6 +15,7 @@ import javax.swing.*;
  * This class contains a main() routine to allow it to be run as a program.
  */
 public class SubKillerOriginal extends JPanel {
+    static final long serialVersionUID = 42L;
     
     public static void main(String[] args) {
         JFrame window = new JFrame("Sub Killer Game");

@@ -1,7 +1,5 @@
 package apcsproject;
 
-import utils.*;
-
 /**
  * A basic building that can be built from a 
  * @author Alexander Ng

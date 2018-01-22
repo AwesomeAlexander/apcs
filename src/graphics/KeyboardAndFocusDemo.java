@@ -18,6 +18,8 @@ import javax.swing.*;
  * This class contains a main() routine so that it can be run as a program
  */
 public class KeyboardAndFocusDemo extends JPanel implements KeyListener/*, FocusListener*/ {
+	static final long serialVersionUID = 42L;
+
 
     /**
      * The main program just opens a window that shows an object of type
@@ -77,7 +79,7 @@ public class KeyboardAndFocusDemo extends JPanel implements KeyListener/*, Focus
 		//*** Draw the square.
 		
 		g.setColor(this.squareColor);
-		g.fillRect(this.squareLeft,this.squareTop,50,50);
+		g.fillRect(this.squareLeft,this.squareTop,KeyboardAndFocusDemo.SQUARE_SIZE,KeyboardAndFocusDemo.SQUARE_SIZE);
 
         /* Print a message that depends on whether the panel has the focus. */
 

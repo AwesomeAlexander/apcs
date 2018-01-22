@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import utils.Drawable;
 
 public class FramedPanel extends JPanel {
+	static final long serialVersionUID = 42L;
+	
 	private Color color;
 	ArrayList<Drawable> drawnObjects; 
 	
