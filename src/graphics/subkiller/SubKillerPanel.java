@@ -15,6 +15,7 @@ public class SubKillerPanel extends JPanel {
 	static final long serialVersionUID = 42L;
 
 	Timer timer;
+	SubKillerListener listener;
 
 	// Objects
 	Boat boat;
@@ -25,28 +26,10 @@ public class SubKillerPanel extends JPanel {
 		super();
 
 		// Listener stuff
-		SubKillerListener listener = new SubKillerListener(this);
+		this.listener = new SubKillerListener(this);
 		this.addKeyListener(listener);
 		this.addFocusListener(listener);
 		this.timer = new Timer(30, listener); // Fires every 30ms
-
-		// Menu stuff & UI
-		JMenuBar menuBar = new JMenuBar();
-		JMenu subkillerMenu = new JMenu("Sub Killer");
-		JMenu optionsMenu = new JMenu("Options");
-		JMenuItem about = new JMenuItem("About"); about.addActionListener(listener);
-		JMenuItem quit = new JMenuItem("Quit"); quit.addActionListener(listener);
-		JMenuItem restart = new JMenuItem("Restart"); restart.addActionListener(listener);
-		
-		subkillerMenu.add(about);
-		subkillerMenu.addSeparator();
-		subkillerMenu.add(quit);
-		subkillerMenu.add(restart);
-
-		menuBar.add(subkillerMenu);
-		menuBar.add(optionsMenu);
-
-		this.add(menuBar);
 
 		this.restart();
 
