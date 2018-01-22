@@ -25,10 +25,10 @@ public class SubKillerPanel extends JPanel {
 		super();
 
 		SubKillerListener listener = new SubKillerListener(this);
+
 		this.addKeyListener(listener);
 		this.addFocusListener(listener);
-
-		this.timer = new Timer(30, listener);
+		this.timer = new Timer(30, listener); // Fires every 30ms
 
 		this.boat = new Boat((int)(this.getWidth()/2),(int)(this.getHeight()/7.5),Color.RED);
 		this.bombs = new ArrayList<Bomb>();

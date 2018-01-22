@@ -22,10 +22,20 @@ public class SubKillerListener implements FocusListener,KeyListener,/*MouseListe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Listens on timer
-		panel.boat.move();
+		// Performs based upon timer
+		
+		// Make sub on random
+		if (Math.random() < 0.04) {
+			panel.subs.add(new Submarine(panel,(int)(Math.random()*)));
+		}
+
+		// Updating objects
+		// panel.boat.move(); // Not needed, boat doesn't move
 		for (Bomb b : panel.bombs) b.move();
 		for (Submarine s : panel.subs) s.move();
+
+		// TODO: bomb deletion - don't want those flying off everywhere
+		// TODO: sub explosions
 	}
 
 	@Override
