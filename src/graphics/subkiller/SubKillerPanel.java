@@ -2,6 +2,7 @@ package graphics.subkiller;
 
 import javax.swing.Timer;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class SubKillerPanel extends JPanel {
 
 		this.timer = new Timer(30, listener);
 
-		this.boat = new Boat((int)(this.getWidth()/2),(int)(this.getHeight()/7.5));
+		this.boat = new Boat((int)(this.getWidth()/2),(int)(this.getHeight()/7.5),Color.RED);
 		this.bombs = new ArrayList<Bomb>();
 		this.subs = new ArrayList<Submarine>();
 

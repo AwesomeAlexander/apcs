@@ -1,6 +1,8 @@
 package graphics.subkiller;
 
 import utils.BasicObject;
+
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -8,12 +10,13 @@ import java.awt.Graphics;
  */
 public class Bomb extends BasicObject {
 
-	public Bomb() {super();}
-	public Bomb(int x,int y) {super(x, y);}
+	// public Bomb() {super();}
+	public Bomb(int x,int y) {super(x, y, 10, Color.BLACK);}
 
 	@Override
 	public void draw(Graphics g) {
-		
+		g.setColor(this.color);
+		g.fillOval(this.x, this.y, this.size, this.size);
 	}
 
 	@Override

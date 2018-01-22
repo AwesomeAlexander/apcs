@@ -23,14 +23,18 @@ public class SubKillerListener implements FocusListener,KeyListener,/*MouseListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Listens on timer
+		panel.boat.move();
+		for (Bomb b : panel.bombs) b.move();
+		for (Submarine s : panel.subs) s.move();
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		// NOTE: Change to acceleratexy? would make boat movement less 'blocky'
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_A:;
 			case KeyEvent.VK_LEFT:
-				this.panel.boat.movexy(10,0);
+				this.panel.boat.movexy(-10,0);
 				break;
 			case KeyEvent.VK_D:;
 			case KeyEvent.VK_RIGHT:

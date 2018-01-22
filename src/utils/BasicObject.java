@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 /**
  * A basic abstract object with some basic constructors and basic methods.
- * Intended for use in conjunction with the {@link javax.swing} elements
+ * Intended for use in conjunction with {@link javax.swing} elements
  * 
  * @author Alexander Ng
  *
@@ -34,9 +34,9 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
 	 */
 	public BasicObject(int x, int y) {
 		this(x,y,10);
@@ -46,11 +46,11 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
 	 * @param size
-	 *            - initial size, Integer
+	 *            - initial size, int
 	 */
 	public BasicObject(int x, int y, int size) {
 		this.x = x;
@@ -62,9 +62,28 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
+	 * @param size
+	 *            - initial size, int
+	 * @param color
+	 * 			  - initial color, Color
+	 */
+	public BasicObject(int x, int y, int size, Color color) {
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.color = color;
+	}
+
+	/**
+	 * Basic Constructor
+	 * 
+	 * @param x
+	 *            - initial x position, int
+	 * @param y
+	 *            - initial y position, int
 	 * @param speed
 	 *            - initial speed, double
 	 */
@@ -78,9 +97,9 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
 	 * @param speed
 	 *            - initial speed, double
 	 * @param direction
@@ -97,32 +116,54 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
+	 * @param size
+	 *            - initial size, int
 	 * @param speed
 	 *            - initial speed, double
-	 * @param size
-	 *            - initial size, Integer
 	 */
-	public BasicObject(int x, int y, double speed, int size) {
+	public BasicObject(int x, int y, int size, double speed) {
 		this.x = x;
 		this.y = y;
-		this.speed = speed;
 		this.size = size;
+		this.speed = speed;
 	}
 
 	/**
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
+	 * @param size
+	 *            - initial size, int
+	 * @param speed
+	 *            - initial speed, double
+	 * @param color
+	 * 			  - initial color, Color
+	 */
+	public BasicObject(int x, int y, int size, double speed, Color color) {
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.speed = speed;
+		this.color = color;
+	}
+
+	/**
+	 * Basic Constructor
+	 * 
+	 * @param x
+	 *            - initial x position, int
+	 * @param y
+	 *            - initial y position, int
 	 * @param sx
-	 *            - initial x speed, Integer
+	 *            - initial x speed, int
 	 * @param sy
-	 *            - initial y speed, Integer
+	 *            - initial y speed, int
 	 */
 	public BasicObject(int x, int y, int sx, int sy) {
 		this.x = x;
@@ -135,15 +176,15 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
 	 * @param sx
-	 *            - initial x speed, Integer
+	 *            - initial x speed, int
 	 * @param sy
-	 *            - initial y speed, Integer
+	 *            - initial y speed, int
 	 * @param size
-	 *            - initial size, Integer
+	 *            - initial size, int
 	 */
 	public BasicObject(int x, int y, int sx, int sy, int size) {
 		this.x = x;
@@ -157,13 +198,13 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
 	 * @param sx
-	 *            - initial x speed, Integer
+	 *            - initial x speed, int
 	 * @param sy
-	 *            - initial y speed, Integer
+	 *            - initial y speed, int
 	 * @param color
 	 *            - initial color, String
 	 */
@@ -179,19 +220,19 @@ public abstract class BasicObject {
 	 * Basic Constructor
 	 * 
 	 * @param x
-	 *            - initial x position, Integer
+	 *            - initial x position, int
 	 * @param y
-	 *            - initial y position, Integer
+	 *            - initial y position, int
 	 * @param sx
-	 *            - initial x speed, Integer
+	 *            - initial x speed, int
 	 * @param sy
-	 *            - initial y speed, Integer
+	 *            - initial y speed, int
 	 * @param r
-	 *            - initial red value, Integer 0-255
+	 *            - initial red value, int 0-255
 	 * @param b
-	 *            - initial blue value, Integer 0-255
+	 *            - initial blue value, int 0-255
 	 * @param g
-	 *            - initial green value, Integer 0-255
+	 *            - initial green value, int 0-255
 	 */
 	public BasicObject(int x, int y, int sx, int sy, int r, int b, int g) {
 		this.x = x;
@@ -219,6 +260,7 @@ public abstract class BasicObject {
 
 	/**
 	 * Updates the object, Defaults move and draw
+	 * @deprecated
 	 */
 	public void update() {
 		this.move();
