@@ -84,7 +84,7 @@ public class SubKillerListener implements FocusListener,KeyListener,MouseListene
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		this.panel.requestFocus();
 	}
 
 	@Override
