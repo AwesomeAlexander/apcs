@@ -1,21 +1,15 @@
 package graphics.subkiller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-// import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * SubKillerListener
  */
-public class SubKillerListener implements FocusListener,KeyListener,MouseListener,/*MouseMotionListener,*/ActionListener {
+public class SubKillerListener implements FocusListener,KeyListener,MouseListener,ActionListener,ChangeListener {
 	static final long serialVersionUID = 42L;
 	
 	SubKillerPanel panel;
@@ -36,6 +30,11 @@ public class SubKillerListener implements FocusListener,KeyListener,MouseListene
 
 		// Performs based upon timer, updates game mechanics
 		this.panel.update();
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		// TODO: this
 	}
 
 	@Override
