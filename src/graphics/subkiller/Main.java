@@ -38,7 +38,7 @@ public class Main {
 
 		// Slider below
 		SubKillerScorePanel scorePanel = new SubKillerScorePanel();
-		// scorePanel.addActionListener(content.listener); // TODO: FIX THIS
+		scorePanel.diffSlider.addChangeListener(content.listener);
 
 		// Adding stuffs to window
 		container.add(menuBar,BorderLayout.NORTH);

@@ -1,6 +1,7 @@
 package graphics.subkiller;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 /**
@@ -10,6 +11,7 @@ public class SubKillerScorePanel extends JPanel {
 	static final long serialVersionUID = 42L;
 
 	private int score = 0;
+	JSlider diffSlider;
 
 	public SubKillerScorePanel() {
 		this.setLayout(new GridLayout(1,2));
@@ -17,7 +19,7 @@ public class SubKillerScorePanel extends JPanel {
 		// Difficulty Slider
 		JPanel difficulty = new JPanel();
 		JLabel diffLabel = new JLabel("Difficulty: ");
-		JSlider diffSlider = new JSlider(1,5,1);
+		diffSlider = new JSlider(1,5,1);
 
 		diffSlider.setMajorTickSpacing(2);
 		diffSlider.setMinorTickSpacing(1);

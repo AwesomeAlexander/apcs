@@ -22,7 +22,7 @@ public class SubKillerPanel extends JPanel {
 	ArrayList<Bomb> bombs;
 	ArrayList<Submarine> subs;
 
-	int subSpeed;
+	int subSpeed,ybound;
 
 	public SubKillerPanel() {
 		super();
@@ -53,7 +53,6 @@ public class SubKillerPanel extends JPanel {
 	public void update() { // Updates game per tick
 		// Make sub on random
 		if (Math.random() < 0.001) {
-			int ybound = 20;
 			this.subs.add(new Submarine(this,(int)(Math.random()*this.getWidth()),(int)(ybound+Math.random()*(this.getHeight()-ybound)),ybound));
 		}
 
@@ -68,7 +67,7 @@ public class SubKillerPanel extends JPanel {
 		}
 		for (int i=0;i<this.subs.size();i++) { // Sub Updates
 			Submarine s = this.subs.get(i);
-			s.move();
+			s.move();s.setSpeed(this.subSpeed,(int)Math.ceil(this.subSpeed/2));
 			if (s.getExplosionStatus() >= 15) { // Sub Deletion
 				this.subs.remove(s);
 				i--;
@@ -92,6 +91,10 @@ public class SubKillerPanel extends JPanel {
 		this.boat = new Boat((int)(this.getWidth()/2),(int)(this.getHeight()/7.5),Color.RED);
 		this.bombs = new ArrayList<Bomb>();
 		this.subs = new ArrayList<Submarine>();
+
+		this.ybound = 100;
+
+		this.subs.add(new Submarine(this,(int)(Math.random()*this.getWidth()),(int)(ybound+Math.random()*(this.getHeight()-ybound)),ybound));
 
 		this.subSpeed = 5;
 	}
