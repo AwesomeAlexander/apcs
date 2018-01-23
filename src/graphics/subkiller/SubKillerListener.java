@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
  * SubKillerListener
  */
 public class SubKillerListener implements FocusListener,KeyListener,MouseListener,/*MouseMotionListener,*/ActionListener {
-
+	static final long serialVersionUID = 42L;
+	
 	SubKillerPanel panel;
 
 	public SubKillerListener(SubKillerPanel panel) {
@@ -73,6 +74,26 @@ public class SubKillerListener implements FocusListener,KeyListener,MouseListene
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 		
 	}
 

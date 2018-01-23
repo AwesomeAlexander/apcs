@@ -22,6 +22,8 @@ public class SubKillerPanel extends JPanel {
 	ArrayList<Bomb> bombs;
 	ArrayList<Submarine> subs;
 
+	int subSpeed;
+
 	public SubKillerPanel() {
 		super();
 
@@ -85,6 +87,6 @@ public class SubKillerPanel extends JPanel {
 		this.bombs = new ArrayList<Bomb>();
 		this.subs = new ArrayList<Submarine>();
 
-		// TODO: scorepanel stuff
+		this.subSpeed = 5;
 	}
 }
