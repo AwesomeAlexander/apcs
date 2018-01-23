@@ -39,8 +39,9 @@ public class SubKillerPanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		System.out.println("THIS WORKS");
 		super.paintComponent(g); // White background
+
+		System.out.println("THIS WORKS");
 
 		this.boat.draw(g);
 		for (Bomb b : this.bombs) b.draw(g);
