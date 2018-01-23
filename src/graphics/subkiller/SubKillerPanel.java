@@ -33,6 +33,8 @@ public class SubKillerPanel extends JPanel {
 		this.addFocusListener(listener);
 		this.timer = new Timer(30, listener); // Fires every 30ms
 
+		this.timer.start();
+
 		this.restart();
 
 	}
@@ -81,6 +83,7 @@ public class SubKillerPanel extends JPanel {
 				}
 			}
 		}
+		this.repaint();
 	}
 
 	public void restart() {
