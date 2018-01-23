@@ -6,13 +6,16 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-// import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 // import java.awt.event.MouseMotionListener;
+
+import javax.swing.JOptionPane;
 
 /**
  * SubKillerListener
  */
-public class SubKillerListener implements FocusListener,KeyListener,/*MouseListener,MouseMotionListener,*/ActionListener {
+public class SubKillerListener implements FocusListener,KeyListener,MouseListener,/*MouseMotionListener,*/ActionListener {
 
 	SubKillerPanel panel;
 
@@ -25,29 +28,13 @@ public class SubKillerListener implements FocusListener,KeyListener,/*MouseListe
 		String str = e.getActionCommand();
 		
 		if (str != null) {
-			if (str.equals("About")) ;
+			if (str.equals("About")) JOptionPane.showMessageDialog(this.panel, "This is a Sub Killer game! Kill dem subs to win.");
+			else if (str.equals("Quit")) System.exit(0);
+			else if (str.equals("Restart")) this.panel.restart();
 		}
 
-		// Performs based upon timer
-		
-		// Make sub on random
-		if (Math.random() < 0.04) {
-			int ybound = 20;
-			panel.subs.add(new Submarine(panel,(int)(Math.random()*panel.getWidth()),(int)(ybound+Math.random()*(panel.getHeight()-ybound)),ybound));
-		}
-
-		// Updating objects
-		// panel.boat.move(); // Not needed, boat doesn't move
-		for (Submarine s : panel.subs) s.move();
-		for (int i=0;i<panel.bombs.size();i++) {
-			Bomb b = panel.bombs.get(i);
-			b.move();
-			if (b.getX() > panel.getHeight()) { // Bomb Deletion
-				panel.bombs.remove(b);
-				i--;
-			}
-			// TODO: sub explosions
-		}
+		// Performs based upon timer, updates game mechanics
+		this.panel.update();
 	}
 
 	@Override
@@ -81,6 +68,11 @@ public class SubKillerListener implements FocusListener,KeyListener,/*MouseListe
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 		
 	}
 
