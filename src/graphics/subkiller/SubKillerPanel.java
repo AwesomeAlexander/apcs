@@ -43,7 +43,7 @@ public class SubKillerPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g); // White background
 
-		System.out.println("THIS WORKS");
+		this.setBackground(Color.BLUE);
 
 		this.boat.draw(g);
 		for (Bomb b : this.bombs) b.draw(g);
@@ -52,7 +52,7 @@ public class SubKillerPanel extends JPanel {
 
 	public void update() { // Updates game per tick
 		// Make sub on random
-		if (Math.random() < 0.04) {
+		if (Math.random() < 0.001) {
 			int ybound = 20;
 			this.subs.add(new Submarine(this,(int)(Math.random()*this.getWidth()),(int)(ybound+Math.random()*(this.getHeight()-ybound)),ybound));
 		}
@@ -83,6 +83,7 @@ public class SubKillerPanel extends JPanel {
 				}
 			}
 		}
+
 		this.repaint();
 	}
 

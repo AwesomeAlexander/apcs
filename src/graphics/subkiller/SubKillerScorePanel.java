@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class SubKillerScorePanel extends JPanel {
 	static final long serialVersionUID = 42L;
-	
+
 	private int score = 0;
 
 	public SubKillerScorePanel() {

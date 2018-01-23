@@ -16,9 +16,6 @@ public class Main {
 		// Total container
 		JPanel container = new JPanel();
 		container.setLayout(new BorderLayout());
-	
-		// Slider below
-		SubKillerScorePanel scorePanel = new SubKillerScorePanel();
 
 		// Main Content
 		SubKillerPanel content = new SubKillerPanel();
@@ -38,6 +35,10 @@ public class Main {
 
 		menuBar.add(subkillerMenu);
 		menuBar.add(optionsMenu);
+
+		// Slider below
+		SubKillerScorePanel scorePanel = new SubKillerScorePanel();
+		// scorePanel.addActionListener(content.listener); // TODO: FIX THIS
 
 		// Adding stuffs to window
 		container.add(menuBar,BorderLayout.NORTH);
