@@ -50,8 +50,13 @@ public class SubKillerPanel extends JPanel {
 	}
 
 	public void update() { // Updates game per tick
+<<<<<<< HEAD
 		// Make sub on random
 		if (Math.random() < 0.001) {
+=======
+		// Make sub on random or no subs
+		if (Math.random() < 0.001 || this.subs.size() == 0 ) {
+>>>>>>> 450613920957521961131bb08fabc0f1493b3255
 			this.subs.add(new Submarine(this,(int)(Math.random()*this.getWidth()),(int)(ybound+Math.random()*(this.getHeight()-ybound)),ybound));
 		}
 
@@ -87,14 +92,21 @@ public class SubKillerPanel extends JPanel {
 
 	public void restart() {
 		// Variable Initiation
-		this.boat = new Boat((int)(this.getWidth()/2),(int)(this.getHeight()/7.5),Color.RED);
+		this.boat = new Boat((int)(this.getWidth()/2),(int)(this.getHeight()/7.5),Color.GREEN);
 		this.bombs = new ArrayList<Bomb>();
 		this.subs = new ArrayList<Submarine>();
 
+<<<<<<< HEAD
 		this.ybound = 100;
 
 		this.subs.add(new Submarine(this,(int)(Math.random()*this.getWidth()),(int)(ybound+Math.random()*(this.getHeight()-ybound)),ybound));
 
+=======
+		this.ybound = (int)(this.getHeight()/7);
+>>>>>>> 450613920957521961131bb08fabc0f1493b3255
 		this.subSpeed = 5;
+
+		this.requestFocusInWindow();
+		this.update();
 	}
 }

@@ -56,10 +56,10 @@ public class Submarine extends BasicObject {
 		}
 		// Moves randomly left/right and up/down
 		if ((!direcHorz&&this.x<=0) || (direcHorz&&this.x>=parent.getWidth()) || Math.random() < 0.04) direcHorz = !direcHorz;
-		if (Math.random() < 0.04) destVert = (int)(ybound+Math.random()*(parent.getHeight()-ybound));
+		if (Math.random() < 0.01) destVert = (int)(ybound+Math.random()*(parent.getHeight()-ybound));
 		this.movexy(
 			(int)(Math.random()*this.sx*(direcHorz ? 1 : -1)),
-			(int)(this.sy*(this.y <= destVert ? 1 : -1)));
+			(int)(this.sy*(this.distanceto(this.x,destVert) <= 4 ? 0 : this.y <= destVert ? 1 : -1)));
 	}
 
 	public void setSpeed(int sx,int sy) {this.sx=sx;this.sy=sy;}

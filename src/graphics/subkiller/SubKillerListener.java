@@ -21,8 +21,8 @@ public class SubKillerListener implements FocusListener,KeyListener,MouseListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String str = e.getActionCommand();
-		
 		if (str != null) {
+			System.out.println("hofweoihwefoih");
 			if (str.equals("About")) JOptionPane.showMessageDialog(this.panel, "This is a Sub Killer game! Kill dem subs to win.");
 			else if (str.equals("Quit")) System.exit(0);
 			else if (str.equals("Restart")) this.panel.restart();
@@ -88,7 +88,7 @@ public class SubKillerListener implements FocusListener,KeyListener,MouseListene
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+
 	}
 
 	@Override
