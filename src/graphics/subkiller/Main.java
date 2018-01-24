@@ -42,8 +42,8 @@ public class Main {
 
 		// Adding stuffs to window
 		container.add(menuBar,BorderLayout.NORTH);
-		container.add(content,BorderLayout.CENTER);
 		container.add(scorePanel,BorderLayout.SOUTH);
+		container.add(content,BorderLayout.CENTER);
 		window.setContentPane(container);
     
 		window.setVisible(true);
