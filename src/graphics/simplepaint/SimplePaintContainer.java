@@ -9,6 +9,8 @@ public class SimplePaintContainer extends JPanel {
 	static final long serialVersionUID = 42L;
 
 	public SimplePaintContainer() {
+		super();
+
 		
 	}
 }
