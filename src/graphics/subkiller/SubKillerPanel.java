@@ -35,15 +35,14 @@ public class SubKillerPanel extends JPanel {
 
 		this.timer.start();
 
+		this.setBackground(Color.BLUE);
+
 		this.restart();
 
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		super.paintComponent(g); // White background
-
-		this.setBackground(Color.BLUE);
 
 		this.boat.draw(g);
 		for (Bomb b : this.bombs) b.draw(g);
