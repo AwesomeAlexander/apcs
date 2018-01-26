@@ -1,18 +1,8 @@
 package graphics.simplepaint;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.GridBagConstraints;
-
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
+import javax.swing.*;
 
 /**
  * SimplePaintContainer
@@ -65,6 +55,8 @@ public class SimplePaintContainer extends JPanel {
 
 		this.drawingSpace.addMouseListener(this.listener);
 		this.drawingSpace.addMouseMotionListener(this.listener);
+		this.drawingSpace.addKeyListener(this.listener);
+		this.drawingSpace.addFocusListener(this.listener);
 
 		// Adding components to master container
 

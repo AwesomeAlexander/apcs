@@ -1,19 +1,18 @@
 package graphics.simplepaint;
 
 import java.awt.event.*;
-import java.util.ArrayList;
-
-import javax.swing.JColorChooser;
-
-import graphics.drawings.Line;
-
 import java.awt.Color;
 import java.awt.Point;
+import javax.swing.BorderFactory;
+import javax.swing.JColorChooser;
+
+import java.util.ArrayList;
+import graphics.drawings.Line;
 
 /**
  * SimplePaintListener
  */
-public class SimplePaintListener extends MouseAdapter implements ActionListener {
+public class SimplePaintListener extends MouseAdapter implements ActionListener, KeyListener, FocusListener {
 
 	SimplePaintPanel panel;
 
@@ -29,14 +28,10 @@ public class SimplePaintListener extends MouseAdapter implements ActionListener 
 			panel.color = getColor(action);
 			return;
 		}
-		switch (action) {
+		switch (action) { // Non-color actions
 			case "QUIT": System.exit(0);
-			case "UNDO":
-				panel.lines.remove(panel.lines.size()-1);
-				panel.repaint();break;
-			case "CLEAR":
-				panel.lines = new ArrayList<Line>();
-				panel.repaint();break;
+			case "CLEAR": clear();break;
+			case "UNDO": removeLast();break;
 			case "CUSTOM":
 				panel.color = JColorChooser.showDialog(panel, "Choose a Custom Color to draw with!", panel.color);
 				if (panel.color==null) panel.color = Color.WHITE;
@@ -46,17 +41,43 @@ public class SimplePaintListener extends MouseAdapter implements ActionListener 
 		}
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (!e.isMetaDown()) return;
+		switch (e.getKeyChar()) {
+			case 'w': System.exit(0);
+			case 'z': removeLast(e.isShiftDown() ? 5 : 1);break;
+			case 'p': clear();break;
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// Nothing
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// Nothing
+	}
+
+	@Override
     public void mousePressed(MouseEvent e) {
+		panel.requestFocusInWindow();
 		if (panel.dragging) return;
 		panel.prev = new Point(e.getX(),e.getY());
     }
 
+	@Override
     public void mouseReleased(MouseEvent e) {
 		if (!panel.dragging) return;
 		panel.dragging = false;
         panel.prev = null;
     }
 
+	@Override
     public void mouseDragged(MouseEvent e) {
         panel.dragging = true;
 
@@ -66,8 +87,33 @@ public class SimplePaintListener extends MouseAdapter implements ActionListener 
         
 		panel.repaint();
 	}
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		panel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 6));
+	}
+
+	// Utils
+
+	void clear() {
+		panel.lines = new ArrayList<Line>();
+	}
+
+	void removeLast() {removeLast(1);}
+	void removeLast(int amount) {
+		for (int i=0;i<amount;i++) {
+			if (panel.lines.size() == 0) return;
+			panel.lines.remove(panel.lines.size()-1);
+		}
+		panel.repaint();
+	}
 	
-	public Color getColor(String thecolor) {
+	Color getColor(String thecolor) {
 		switch (thecolor.toUpperCase()) {
 			case "RED": return Color.RED;
 			case "GREEN": return Color.GREEN;
