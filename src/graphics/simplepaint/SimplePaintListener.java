@@ -102,6 +102,7 @@ public class SimplePaintListener extends MouseAdapter implements ActionListener,
 
 	void clear() {
 		panel.lines = new ArrayList<Line>();
+		panel.repaint();
 	}
 
 	void removeLast() {removeLast(1);}
