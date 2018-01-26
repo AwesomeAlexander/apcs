@@ -59,7 +59,7 @@ import javax.swing.SwingUtilities;
  * build interactive games and simulations with Java.
  * downloaded from apcs.io
  */
-public class Window extends JApplet {
+ public class Window extends JApplet {
 	// Serial version UID
 	private static final long serialVersionUID = 1L;
 

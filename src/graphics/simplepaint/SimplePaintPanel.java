@@ -17,14 +17,8 @@ public class SimplePaintPanel extends JPanel {
 	boolean dragging;
 	ArrayList<Line> lines;
 	Color color;
-	
-	public SimplePaintPanel() {
-		super(); // Class act as drawing area
 
-		// (Mouse) Listener mechanics
-		SimplePaintListener listener = new SimplePaintListener(this);
-		this.addMouseListener(listener);
-		this.addMouseMotionListener(listener);
+	public SimplePaintPanel() {
 
 		// Black background
 		this.setBackground(Color.BLACK);
@@ -34,10 +28,13 @@ public class SimplePaintPanel extends JPanel {
 
 		// Line array
 		this.lines = new ArrayList<Line>();
+
+		// Default Drawing Color
+		this.color = Color.WHITE;
 	}
 
 	public void paintComponent(Graphics g) {
-        super.paintComponent(g);  // Fill with background color (white).
+        super.paintComponent(g);  // Fill with background color (black).
         
 		for (Line l : this.lines) l.draw(g);
     }
