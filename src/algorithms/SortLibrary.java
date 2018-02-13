@@ -1,3 +1,4 @@
+package algorithms;
 
 import java.util.Arrays;
 
@@ -33,7 +34,7 @@ public class SortLibrary {
 	// void normally would be OK.  Don't need to return int[] or anything.
 	// However, I want you to keep track of and return the number of swaps.
 	public static int bubbleSort(int[] nums) {
-
+		return 0;
 	}
 	
 	// void is OK.  'unsorted' simply receives a copy of reference to the unsorted
