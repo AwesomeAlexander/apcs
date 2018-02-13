@@ -34,7 +34,14 @@ public class SortLibrary {
 	// void normally would be OK.  Don't need to return int[] or anything.
 	// However, I want you to keep track of and return the number of swaps.
 	public static int bubbleSort(int[] nums) {
-		return 0;
+		int ccount = 0;
+		for (int i=nums.length-1;i>0;i++) {
+			for (int j=1;j<i;j++) {
+				if (nums[j] < nums[j-1]) swapInArr(nums,j,j-1);
+				ccount++;
+			}
+		}
+		return ccount;
 	}
 	
 	// void is OK.  'unsorted' simply receives a copy of reference to the unsorted
@@ -45,5 +52,9 @@ public class SortLibrary {
 	}
 
 	
-	
+	private static void swapInArr(int[] arr,int indA,int indB) {
+		int temp = arr[indA];
+		arr[indA] = arr[indB];
+		arr[indB] = temp;
+	}
 }
