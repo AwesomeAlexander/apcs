@@ -19,7 +19,7 @@ public class SortLibrary {
 		int[] copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
 		
 		// ***Enter which sort you want to test
-		bubbleSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
+		insertionSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
 		Arrays.sort(copyOfArrayToSort);	// call java.util.Array's sort method for comparison
 		
 		if(arrayToSort.length < 50) {
@@ -31,28 +31,65 @@ public class SortLibrary {
 		
 	}
 	
-	// void normally would be OK.  Don't need to return int[] or anything.
-	// However, I want you to keep track of and return the number of swaps.
+	// √
 	public static int bubbleSort(int[] nums) {
-		int ccount = 0;
-		for (int i=nums.length-1;i>0;i++) {
+		int ccount = 0;boolean swappedsome = true; // for efficiency
+		for (int i=nums.length;i>=0 && swappedsome;i--) {
+			swappedsome = false;
 			for (int j=1;j<i;j++) {
-				if (nums[j] < nums[j-1]) swapInArr(nums,j,j-1);
-				ccount++;
+				if (nums[j] < nums[j-1]) {
+					swappedsome = true;
+					swapInArr(nums,j,j-1);
+					ccount++;
+				}
 			}
 		}
 		return ccount;
 	}
-	
-	// void is OK.  'unsorted' simply receives a copy of reference to the unsorted
-	// array 'arrayToSort' when method is called.  When your method finishes, 
-	// 'arrayToSort' will point to the sorted array
-	public static void insertionSort(int[] unsorted) {
 
+	// X
+	public static void insertionSort(int[] nums) {
+		for (int i=1;i<nums.length;i++) {
+			int num = nums[i], j = i-1;
+			for (;nums[j] > nums[i] && j >= 0;j--) nums[j+1] = nums[j];
+			nums[j+1] = num;
+			System.out.println(Arrays.toString(nums));
+		}
+	}
+
+	// X
+	public static void selectionSort(int[] nums) {
+		int minInd;
+		for (int i=0;i<nums.length;i++) {
+			minInd = i;
+			for (int j=i;j<nums.length;j++) { // Find Minimum
+				if (nums[minInd] > nums[j]) minInd = j;
+			}
+			swapInArr(nums, i, minInd);
+		}
+	}
+
+	// X
+	public static void mergeSort(int[] nums) {nums = mergeSort(Arrays.copyOfRange(nums, 0, nums.length/2),Arrays.copyOfRange(nums, nums.length/2,nums.length));}
+	private static int[] mergeSort(int[] num1,int[] num2) {
+		if (num1.length > 1) num1 = mergeSort(Arrays.copyOfRange(num1, 0, num1.length/2),Arrays.copyOfRange(num1, num1.length/2,num1.length)); // split
+		if (num2.length > 1) num2 = mergeSort(Arrays.copyOfRange(num2, 0, num2.length/2),Arrays.copyOfRange(num2, num2.length/2,num2.length)); // split
+
+		int[] merged = new int[num1.length+num2.length];
+		for (int i=0,j=0,c=0;c<merged.length;) {
+			// Puts smallest and increments index
+			merged[c++] = (num1[i] < num2[j] ? num1[i++] : num2[j++]);
+
+			// Catch if one array ends
+			if (i >= num1.length) while (j < num2.length) merged[c++] = num2[j++];
+			else if (j >= num2.length) while (i < num1.length) merged[c++] = num1[i++];
+		}
+		return merged;
 	}
 
 	
-	private static void swapInArr(int[] arr,int indA,int indB) {
+	private static void swapInArr(int[] arr, int indA, int indB) {
+		if (indA == indB) return;
 		int temp = arr[indA];
 		arr[indA] = arr[indB];
 		arr[indB] = temp;
