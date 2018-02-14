@@ -12,12 +12,15 @@ public class SortLibrary {
 		int[] reversed = new int[]{94,85,82,77,76,64,51,47,40,33,28,15,11,9,2};
 		int[] mostlySorted = new int[]{2,85,11,15,28,33,47,40,51,64,76,77,82,9,94};
 		int[] longerArray = ArrayImporter.readArrayFile("smallArray.txt"); 
-		int[] myCustomTest = new int[]{15, 23, 42, 4, 8, 16, 1};		
+		int[] myCustomTest = new int[]{15, 23, 42, 4, 8, 16, 1};	
+		
 		
 		// ***Enter your array to sort here
-		int[] arrayToSort = random; // arrayToSort will point to the array you choose
+		int[] arrayToSort = reversed; // arrayToSort will point to the array you choose
 		int[] copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
 		
+		if(arrayToSort.length < 50) System.out.println("Initial: " + Arrays.toString(arrayToSort));
+
 		// ***Enter which sort you want to test
 		insertionSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
 		Arrays.sort(copyOfArrayToSort);	// call java.util.Array's sort method for comparison
@@ -50,10 +53,11 @@ public class SortLibrary {
 	// X
 	public static void insertionSort(int[] nums) {
 		for (int i=1;i<nums.length;i++) {
-			int num = nums[i], j = i-1;
-			for (;nums[j] > nums[i] && j >= 0;j--) nums[j+1] = nums[j];
-			nums[j+1] = num;
-			System.out.println(Arrays.toString(nums));
+			int num = nums[i], j = i;
+			//for (;j >= 0 && nums[j] > nums[j+1];j--) nums[j+1] = nums[j];
+			while (--j >= 0 && num > nums[j]) nums[j] = nums[j-1];
+			nums[++j] = num;
+			System.out.println("i="+i+" j="+j+" "+Arrays.toString(nums));
 		}
 	}
 
