@@ -19,12 +19,10 @@ public class SortLibrary {
 		int[] arrayToSort = reversed; // arrayToSort will point to the array you choose
 		int[] copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
 		
-		if(arrayToSort.length < 50) System.out.println("Initial: " + Arrays.toString(arrayToSort));
-
 		// ***Enter which sort you want to test
 		insertionSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
 		Arrays.sort(copyOfArrayToSort);	// call java.util.Array's sort method for comparison
-		
+
 		if(arrayToSort.length < 50) {
 			System.out.println("Result after sort: " + Arrays.toString(arrayToSort));
 			System.out.println("Result should be: " + Arrays.toString(copyOfArrayToSort));
@@ -50,18 +48,16 @@ public class SortLibrary {
 		return ccount;
 	}
 
-	// X
+	// √
 	public static void insertionSort(int[] nums) {
 		for (int i=1;i<nums.length;i++) {
 			int num = nums[i], j = i;
-			//for (;j >= 0 && nums[j] > nums[j+1];j--) nums[j+1] = nums[j];
-			while (--j >= 0 && num > nums[j]) nums[j] = nums[j-1];
+			while (--j >= 0 && num < nums[j]) nums[j+1] = nums[j];
 			nums[++j] = num;
-			System.out.println("i="+i+" j="+j+" "+Arrays.toString(nums));
 		}
 	}
 
-	// X
+	// √
 	public static void selectionSort(int[] nums) {
 		int minInd;
 		for (int i=0;i<nums.length;i++) {
@@ -73,8 +69,11 @@ public class SortLibrary {
 		}
 	}
 
-	// X
-	public static void mergeSort(int[] nums) {nums = mergeSort(Arrays.copyOfRange(nums, 0, nums.length/2),Arrays.copyOfRange(nums, nums.length/2,nums.length));}
+	// √
+	public static void mergeSort(int[] nums) {
+		int[] temp = mergeSort(Arrays.copyOfRange(nums, 0, nums.length/2),Arrays.copyOfRange(nums, nums.length/2,nums.length));
+		for (int i=0;i<nums.length;i++) nums[i] = temp[i];
+	}
 	private static int[] mergeSort(int[] num1,int[] num2) {
 		if (num1.length > 1) num1 = mergeSort(Arrays.copyOfRange(num1, 0, num1.length/2),Arrays.copyOfRange(num1, num1.length/2,num1.length)); // split
 		if (num2.length > 1) num2 = mergeSort(Arrays.copyOfRange(num2, 0, num2.length/2),Arrays.copyOfRange(num2, num2.length/2,num2.length)); // split
