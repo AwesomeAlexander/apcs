@@ -90,6 +90,26 @@ public class SortLibrary {
 		return merged;
 	}
 
+	public static void humanSort(int[] nums) {
+
+		int[] out = new int[nums.length];
+
+		// Find Min & Max
+		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+		for (int i=0;i<nums.length;i++) {
+			min = Math.min(nums[i],min);
+			max = Math.max(nums[i],max);
+		}
+
+		// Sorting
+		for (int i=0;i<nums.length;i++) {
+			out[/*function here*/ 0] = nums[i];
+		}
+
+		// (Optional) Copying over to nums, void function
+		for (int i=0;i<nums.length;i++) nums[i] = out[i];
+		// return nums; // Other option if function is return instead of modifying input
+	}
 	
 	private static void swapInArr(int[] arr, int indA, int indB) {
 		if (indA == indB) return;

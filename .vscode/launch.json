@@ -11,7 +11,7 @@
 			"cwd": "${workspaceFolder}",
 			"console": "internalConsole",
 			"stopOnEntry": false,
-			"mainClass": "algorithms.SortLibrary",
+			"mainClass": "",
 			"args": ""
 		}
 	]
