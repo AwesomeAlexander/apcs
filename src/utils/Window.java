@@ -1928,34 +1928,4 @@ import javax.swing.SwingUtilities;
 		Window.addColor("yellow", 255, 255, 0);
 		Window.addColor("yellow green", 154, 205, 50);
 	}
-	
-	/**
-	 * Draws a list of BasicObjects
-	 * @param basicObjects - list of BasicObjects
-	 */
-	public static void draw(BasicWindowObject ... basicObjects) {
-		for (BasicWindowObject n : basicObjects) {
-			n.draw();
-		}
-	}
-	
-	/**
-	 * Moves a list of BasicObjects
-	 * @param basicObjects - list of BasicObjects
-	 */
-	public static void move(BasicWindowObject ... basicObjects) {
-		for (BasicWindowObject n : basicObjects) {
-			n.move();
-		}
-	}
-	
-	/**
-	 * Updates a list of BasicObjects, default draw and move
-	 * @param basicObjects - list of BasicObjects
-	 */
-	public static void update(BasicWindowObject ... basicObjects) {
-		for (BasicWindowObject n : basicObjects) {
-			n.update();
-		}
-	}
 }
