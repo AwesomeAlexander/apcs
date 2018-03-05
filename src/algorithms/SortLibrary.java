@@ -53,7 +53,7 @@ public class SortLibrary {
 		for (int i=1;i<nums.length;i++) {
 			int num = nums[i], j = i;
 			while (--j >= 0 && num < nums[j]) nums[j+1] = nums[j];
-			nums[++j] = num;
+			nums[j+1] = num;
 		}
 	}
 
