@@ -78,6 +78,9 @@ public final class MaxSubsequenceSumTester
         long startTime = System.currentTimeMillis();
         
         for( int i = 0, j = 0; j < a.length; j++ ) {
+			// Add up the next element at j,
+			// then if sum is negative,
+			// reset to index after j, (and set j & i to that index)
 			if ((thisSum+=a[j]) < 0) thisSum = a[i = ++j];
 
 			if (thisSum > maxSum) {
