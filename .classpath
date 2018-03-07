@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<!--
+		Eclipse puts this in when I add it via the gui (It seems to be built in)
+		But when I run this uncommented VSCode, it fails at launch, giving me only "Error"
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	
+		My attempt at importing a new library manually, errors out the same way.
+	<classpathentry kind="lib" path="/Users/alexanderng/Documents/Coding/Java/libs/junit-4.12.jar">
+	-->
 	<classpathentry kind="output" path="bin"/>
 </classpath>
