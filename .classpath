@@ -13,8 +13,6 @@
 	
 		My attempt at importing a new library manually, errors out the same way.
 	<classpathentry kind="lib" path="/Users/alexanderng/Documents/Coding/Java/libs/junit-4.12.jar">
-
 	-->
-	
 	<classpathentry kind="output" path="bin"/>
 </classpath>
