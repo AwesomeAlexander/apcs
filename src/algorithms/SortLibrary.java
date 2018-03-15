@@ -1,4 +1,4 @@
-package algorithms;
+// package algorithms;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ public class SortLibrary {
 		int[] alreadySorted = new int[]{2,9,11,15,28,33,40,47,51,64,76,77,82,85,94};
 		int[] reversed = new int[]{94,85,82,77,76,64,51,47,40,33,28,15,11,9,2};
 		int[] mostlySorted = new int[]{2,85,11,15,28,33,47,40,51,64,76,77,82,9,94};
-		int[] longerArray = ArrayImporter.readArrayFile("smallArray.txt"); 
+		//int[] longerArray = ArrayImporter.readArrayFile("smallArray.txt"); 
 		int[] myCustomTest = new int[]{15, 23, 42, 4, 8, 16, 1};	
 		
 		
@@ -85,7 +85,7 @@ public class SortLibrary {
 
 			// Catch if one array ends
 			if (i >= num1.length) while (j < num2.length) merged[c++] = num2[j++];
-			else if (j >= num2.length) while (i < num1.length) merged[c++] = num1[i++];
+			if (j >= num2.length) while (i < num1.length) merged[c++] = num1[i++];
 		}
 		return merged;
 	}
@@ -101,8 +101,12 @@ public class SortLibrary {
 
 		// Iterating through partition, sorting to lower and higher partitions
 		for (int i=low,j=high;i <= j;) {
-			while (nums[i] <= pivot && i<=j) i++;
-			while (nums[j] >= pivot && j>=i) j--;
+			while (nums[i] < pivot && i<=j) i++;
+			while (nums[j] > pivot && j>=i) j--;
+
+			if (nums[i] == pivot) pivotInd = i;
+			if (nums[j] == pivot) pivotInd = j;
+
 			swapInArr(nums,i,j);
 		}
 
