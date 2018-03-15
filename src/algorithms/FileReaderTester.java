@@ -25,7 +25,7 @@ public class FileReaderTester {
     		// FileReader reads text files in the default encoding.
         	fileReader = new FileReader(fileName);
     		// Always wrap FileReader in BufferedReader.
-    		//http://stackoverflow.com/questions/9648811/specific-difference-between-bufferedreader-and-filereader
+    		// http://stackoverflow.com/questions/9648811/specific-difference-between-bufferedreader-and-filereader
         	bufferedReader = new BufferedReader(fileReader);
     
     		System.out.println("Starting to read the file...");
@@ -44,11 +44,10 @@ public class FileReaderTester {
         	// (simulated by randomChanceEvent())
         	System.out.println("Error reading file '" + fileName + "'");                  
 		} catch (NullPointerException e) {
-			// N/A
-		} finally {
         	// Print this after File is done reading
 			System.out.println("...Finished reading file");
-			try {bufferedReader.close();} catch(Exception e) {}
+		} finally {
+			if (bufferedreader != null) bufferedReader.close();
 		}
 	}
     

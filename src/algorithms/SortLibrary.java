@@ -16,11 +16,11 @@ public class SortLibrary {
 		
 		
 		// ***Enter your array to sort here
-		int[] arrayToSort = reversed; // arrayToSort will point to the array you choose
+		int[] arrayToSort = random; // arrayToSort will point to the array you choose
 		int[] copyOfArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
 		
 		// ***Enter which sort you want to test
-		insertionSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
+		quickSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
 		Arrays.sort(copyOfArrayToSort);	// call java.util.Array's sort method for comparison
 
 		if(arrayToSort.length < 50) {
@@ -88,6 +88,26 @@ public class SortLibrary {
 			else if (j >= num2.length) while (i < num1.length) merged[c++] = num1[i++];
 		}
 		return merged;
+	}
+
+	public static void quickSort(int[] nums) {quickSort(nums,(int)(Math.random()*(nums.length-0)+0),0,nums.length-1);}
+	public static void quickSort(int[] nums,int pivotInd,int low,int high) {
+		// Swap to center, set pivot & pivotInd
+		// UPDATE: Wouldn't work. Partitions may not be equal.
+		// int midInd;
+		// swapInArr(nums,pivotInd,midInd=(int)((high-low)/2));
+		// int pivot = nums[pivotInd = (int)((high-low)/2)];
+		int pivot = nums[pivotInd];
+
+		// Iterating through partition, sorting to lower and higher partitions
+		for (int i=low,j=high;i <= j;) {
+			while (nums[i] <= pivot && i<=j) i++;
+			while (nums[j] >= pivot && j>=i) j--;
+			swapInArr(nums,i,j);
+		}
+
+		quickSort(nums,(int)(Math.random()*(high-low+1)+low),low,pivotInd-1);
+		quickSort(nums,(int)(Math.random()*(high-low+1)+low),pivotInd+1,high);
 	}
 
 	public static void humanSort(int[] nums) {
