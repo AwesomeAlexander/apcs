@@ -92,12 +92,10 @@ public class SortLibrary {
 
 	public static void quickSort(int[] nums) {quickSort(nums,(int)(Math.random()*(nums.length-0)+0),0,nums.length-1);}
 	public static void quickSort(int[] nums,int pivotInd,int low,int high) {
-		// Swap to center, set pivot & pivotInd
-		// UPDATE: Wouldn't work. Partitions may not be equal.
-		// int midInd;
-		// swapInArr(nums,pivotInd,midInd=(int)((high-low)/2));
-		// int pivot = nums[pivotInd = (int)((high-low)/2)];
+		if (low >= high || (low < 0 || high > nums.length)) return;
+
 		int pivot = nums[pivotInd];
+		System.out.println("Called with low: "+low+", high: "+high+", and Pivot: nums["+pivotInd+"] = "+pivot);
 
 		// Iterating through partition, sorting to lower and higher partitions
 		for (int i=low,j=high;i <= j;) {

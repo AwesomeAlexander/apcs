@@ -47,7 +47,7 @@ public class FileReaderTester {
         	// Print this after File is done reading
 			System.out.println("...Finished reading file");
 		} finally {
-			if (bufferedreader != null) bufferedReader.close();
+			try {bufferedReader.close();} catch(IOException e) {}
 		}
 	}
     
