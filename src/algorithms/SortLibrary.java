@@ -14,14 +14,16 @@ public class SortLibrary {
 		int[] longerArray = ArrayImporter.readArrayFile("smallArray.txt"); 
 		int[] myCustomTest = new int[]{15, 23, 42, 4, 8, 16, 1};	
 		
-		
-		// ***Enter your array to sort here
-		int[] arrayToSort = random; // arrayToSort will point to the array you choose
+		int[] arrayToSort = random;
 		int[] checkerArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
 		
-		// ***Enter which sort you want to test
-		humanSort(arrayToSort);		// Call your sort method -- Remember array is modified in the method, not returned!
-		Arrays.sort(checkerArrayToSort);	// call java.util.Array's sort method for comparison
+		long time1 = System.currentTimeMillis();
+		quickSort(arrayToSort);
+		time1 = System.currentTimeMillis() - time1;
+
+		long time2 = System.currentTimeMillis();
+		Arrays.sort(checkerArrayToSort);
+		time2 = System.currentTimeMillis() - time2;
 
 		if(arrayToSort.length < 50) {
 			System.out.println("Result after sort: " + Arrays.toString(arrayToSort));
@@ -29,7 +31,8 @@ public class SortLibrary {
 		}
 		
 		System.out.println("Sorts match? " + Arrays.equals(arrayToSort, checkerArrayToSort));
-		
+
+		System.out.println("Your sorting algorithm took "+time1+" ms, and Arrays.sort() (A Dual-Pivot Quicksort) took "+time2+" ms.");
 	}
 	
 	// √
@@ -135,7 +138,7 @@ public class SortLibrary {
 			if (out[(int)Math.round(place)] != 0) {
 				out[(int)Math.round(place)] = nums[i];
 			} else {
-
+				// TODO: implement this
 			}
 		}
 
