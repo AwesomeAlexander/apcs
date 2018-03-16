@@ -93,6 +93,7 @@ public class SortLibrary {
 		return merged;
 	}
 
+	// √
 	public static void quickSort(int[] nums) {quickSort(nums,0,nums.length-1);}
 	public static void quickSort(int[] nums,int low,int high) {
 		if (low >= high || (low < 0 || high > nums.length)) return;
@@ -115,6 +116,7 @@ public class SortLibrary {
 		quickSort(nums,pivotInd+1,high);
 	}
 
+	// TODO: Fix.
 	public static void humanSort(int[] nums) {
 
 		int[] out = new int[nums.length];
