@@ -8,8 +8,9 @@ public class LinkedListOfStrings {
 
 	// iteratively traverse the Linked List, printing out the String + " --> "
 	// unless it's the last node, in which case print out the String + " --> null"
+	@Override
 	public String toString() {
-		String out = "Head: ";
+		String out = "LinkedList: ";
 		for (Node<String> runner = this.head; runner != null ;out+=runner.value+" -> ",runner = runner.getNext()) ;
 		return out+="null";
 	}
@@ -26,13 +27,22 @@ public class LinkedListOfStrings {
 	// whose String contains str
 	public int recursivelyCountNodesWithString(Node<String> head, String str) {
 		if (head == null) return 0;
-		return (head.value.equals(str) ? 1 : 0) + recursivelyCountNodesWithString(head.getNext());
+		return (head.value.equals(str) ? 1 : 0) + recursivelyCountNodesWithString(head.getNext(),str);
 	}
 	
 	// Prints the nodes in reverse, iteratively
 	public void printReversed(Node<String> head) {
+		Node<String> runner,rev = null,temp = null;
 
+		// Constructing Reverse
+		for (runner = this.head; runner != null ;runner = runner.getNext()) {
+			temp = new Node<String>(runner.value);
+			temp.setNext(rev);
+			rev = temp;
+		}
 
+		// Printing reverse
+		for (runner = rev; runner != null ;runner = runner.getNext()) System.out.println(runner.value);
 	}
 	
 	// Prints the nodes in reverse, recursively
