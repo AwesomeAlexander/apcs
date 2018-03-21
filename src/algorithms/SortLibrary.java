@@ -18,7 +18,7 @@ public class SortLibrary {
 		int[] checkerArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);
 		
 		long time1 = System.currentTimeMillis();
-		quickSort(arrayToSort);
+		mergeSort(arrayToSort);
 		time1 = System.currentTimeMillis() - time1;
 
 		long time2 = System.currentTimeMillis();
@@ -75,7 +75,7 @@ public class SortLibrary {
 	// √
 	public static void mergeSort(int[] nums) {
 		int[] temp = mergeSort(Arrays.copyOfRange(nums, 0, nums.length/2),Arrays.copyOfRange(nums, nums.length/2,nums.length));
-		for (int i=0;i<nums.length;i++) nums[i] = temp[i];
+		for (int i=0;i<nums.length;i++) nums[i] = temp[i]; // Becuz Void
 	}
 	private static int[] mergeSort(int[] num1,int[] num2) {
 		if (num1.length > 1) num1 = mergeSort(Arrays.copyOfRange(num1, 0, num1.length/2),Arrays.copyOfRange(num1, num1.length/2,num1.length)); // split
@@ -90,10 +90,11 @@ public class SortLibrary {
 			if (i >= num1.length) while (j < num2.length) merged[c++] = num2[j++];
 			if (j >= num2.length) while (i < num1.length) merged[c++] = num1[i++];
 		}
+
 		return merged;
 	}
 
-	// √
+	// √ (not repeating elements)
 	public static void quickSort(int[] nums) {quickSort(nums,0,nums.length-1);}
 	public static void quickSort(int[] nums,int low,int high) {
 		if (low >= high || (low < 0 || high > nums.length)) return;
