@@ -1,5 +1,7 @@
 package algorithms.linkedlists;
 
+import utils.Node;
+
 public class LinkedListTester {
 
 	public static void main(String[] args) {

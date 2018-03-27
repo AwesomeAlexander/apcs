@@ -1,4 +1,4 @@
-package algorithms.linkedlists;
+package utils;
 
 /**
  * Node
