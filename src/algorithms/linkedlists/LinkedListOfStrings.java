@@ -1,15 +1,25 @@
 package algorithms.linkedlists;
 
+import utils.Node;
+
 public class LinkedListOfStrings {
 
 	Node<String> head;
 	int nodeCount;
 
+<<<<<<< HEAD
 	public LinkedListOfStrings(String... nodes) {
+=======
+	public LinkedListOfStrings(String...nodes) {
+		this.resetTo(nodes);
+	}
+
+	public resetTo(String[] nodes) {
+>>>>>>> 9308d4691109e0d9a155ee0285185ed4a617971f
 		if (nodes.length < 1) return;
 		Node<String> runner = this.head = new Node<String>(nodes[0]);
 		for (nodeCount=0;nodeCount<nodes.length;nodeCount++) runner = runner.setNext(new Node<String>(nodes[nodeCount]));
-		nodeCount--; // mbe?
+		nodeCount--; // TODO: test
 	}
 
 	@Override
