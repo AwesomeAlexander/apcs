@@ -4,7 +4,7 @@ public class BinaryTreeOfInts {
 	// what does this class need as an instance variable?  
 	// e.g. our DynamicArrayOfInts had an int[] of size 8 "under the hood"
 	// our LinkedListOfStrings had a pointer to a Node called 'head' "under the hood"
-
+	TreeNode root;
 
 	
 	public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class BinaryTreeOfInts {
 		 * 			/	 	\
 		 * 		  8			   23
 		 * 		/   \         /   \
-		 * 	   4	     15		 n     42
+		 * 	   4     15		 n     42
 		 *    / \    / \           / \
 		 *   n   5   n  n         n   n
 		 */	
@@ -44,8 +44,11 @@ public class BinaryTreeOfInts {
 	}
 	
 
-	public int getCount(TreeNode root) { 
-
+	public int getCount(TreeNode root) {
+		int sum=0;
+		if (root.left != null) sum+=1+getCount(root.left);
+		if (root.right != null) sum+=1+getCount(root.right);
+		return sum;
 	}
 	
 	
@@ -55,7 +58,7 @@ public class BinaryTreeOfInts {
 	 * 			/	 	\
 	 * 		  8			   23
 	 * 		/   \         /   \
-	 * 	   4	     15		 n     42
+	 * 	   4     15		 n     42
 	 *    / \    / \           / \
 	 *   n   5   n  n         n   n
 	 */	

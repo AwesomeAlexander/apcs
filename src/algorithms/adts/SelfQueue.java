@@ -1,11 +1,9 @@
-package algorithms;
-
-import utils.Node;
+package algorithms.adts;
 
 /**
  * SelfQueue
  */
-public class SelfQueue<E> implements Queue<E> {
+public class SelfQueue<E> {
 	Node<E> tail,head;
 
 	public SelfQueue() {
