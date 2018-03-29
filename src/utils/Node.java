@@ -4,7 +4,7 @@ package utils;
  * Node
  */
 public class Node<E> {
-	E value;
+	public E value;
 	private Node<E> next;
 
 	public Node(E value) {

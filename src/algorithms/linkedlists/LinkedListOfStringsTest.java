@@ -18,7 +18,7 @@ public class LinkedListOfStringsTest {
 		addNodes();
 	}
 
-	public addNodes() {
+	public void addNodes() {
 		testLinkedList.resetTo(new String[] {"A0","A1","A2","A3","A4","A5","A6","A7","A8","A9"});
 	}
 	
@@ -44,7 +44,7 @@ public class LinkedListOfStringsTest {
 		addNodes(); // also clears previous Nodes
 		testLinkedList.add(new Node("A10"));
 		assertEquals("Size is incorrect when adding a Node to end of populated list", 11, testLinkedList.size());
-		Node runner = testLinkedList.head;
+		Node<String> runner = testLinkedList.head;
 		try {
 			for(int i = 0; i < 11; i++, runner = runner.next) // test the contents of A0-A9, plus newly added A10
 				assertEquals("Node " + i + " was altered somehow after adding a Node to the end of populated list of length 10", "A" + i, runner.name);

@@ -23,21 +23,27 @@ public class LinkedListTester {
 
 
 		// check .toString()
-		System.out.println(myLinkedList); 
+		System.out.println(myLinkedList);
+		System.out.println("Size: "+myLinkedList.size());
 
-		// check iterative and recursive count nodes
-		System.out.println(myLinkedList.countNodesWithString("Abe"));
-		System.out.println(myLinkedList.recursivelyCountNodesWithString(myLinkedList.head, "Abe"));
+		myLinkedList.add(10,new Node<String>("NewEnd"));
+		System.out.println(myLinkedList);
+		System.out.println("Size: "+myLinkedList.size());
+
+		// √
+		// // check iterative and recursive count nodes
+		// System.out.println("Abes - "+myLinkedList.countNodesWithString("Abe"));
+		// System.out.println("Abes - "+myLinkedList.recursivelyCountNodesWithString(myLinkedList.head, "Abe"));
 		
-		// check iterative and recursive print reversed (HW)
-		myLinkedList.recursivelyPrintReversed(myLinkedList.head);
-		System.out.println();
-		myLinkedList.recursivelyPrintReversed(myLinkedList.head.getNext().getNext()); 
+		// // check iterative and recursive print reversed (HW)
+		// myLinkedList.recursivelyPrintReversed(myLinkedList.head);
+		// System.out.println();
+		// myLinkedList.recursivelyPrintReversed(myLinkedList.head.getNext().getNext()); 
 		
-		System.out.println();
-		myLinkedList.printReversed(myLinkedList.head);
-		System.out.println();
-		myLinkedList.printReversed(myLinkedList.head.getNext().getNext());
+		// System.out.println();
+		// myLinkedList.printReversed(myLinkedList.head);
+		// System.out.println();
+		// myLinkedList.printReversed(myLinkedList.head.getNext().getNext());
 	}
 	
 	

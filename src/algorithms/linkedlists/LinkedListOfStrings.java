@@ -7,19 +7,15 @@ public class LinkedListOfStrings {
 	Node<String> head;
 	int nodeCount;
 
-<<<<<<< HEAD
-	public LinkedListOfStrings(String... nodes) {
-=======
+
 	public LinkedListOfStrings(String...nodes) {
 		this.resetTo(nodes);
 	}
 
-	public resetTo(String[] nodes) {
->>>>>>> 9308d4691109e0d9a155ee0285185ed4a617971f
+	public void resetTo(String[] nodes) {
 		if (nodes.length < 1) return;
 		Node<String> runner = this.head = new Node<String>(nodes[0]);
-		for (nodeCount=0;nodeCount<nodes.length;nodeCount++) runner = runner.setNext(new Node<String>(nodes[nodeCount]));
-		nodeCount--; // TODO: test
+		for (nodeCount=1;nodeCount<nodes.length;nodeCount++) runner = runner.setNext(new Node<String>(nodes[nodeCount]));
 	}
 
 	@Override
@@ -49,7 +45,7 @@ public class LinkedListOfStrings {
 		Node<String> runner,rev = null,temp = null;
 
 		// Constructing Reverse
-		for (runner = this.head; runner != null ;runner = runner.getNext()) {
+		for (runner = head; runner != null ;runner = runner.getNext()) {
 			temp = new Node<String>(runner.value);
 			temp.setNext(rev);
 			rev = temp;
@@ -79,6 +75,7 @@ public class LinkedListOfStrings {
 		Node<String> runner;
 		for (runner = this.head; runner.getNext() != null ;runner = runner.getNext()) if (n.value.equals(runner.value)) return false;
 		runner.setNext(n);
+		nodeCount++;
 		return true;
 	}
 	
@@ -86,11 +83,14 @@ public class LinkedListOfStrings {
 	// Throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
 	public void add(int index, Node<String> n) {
 		if (index < 0) throw new IndexOutOfBoundsException("Index must be positive.");
-		if (index >= this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
+		if (index > this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
+		if (index == 0) {n.setNext(head);this.head = n;nodeCount++;return;}
+		if (index == this.size()) for (Node<String> runner=this.head;runner!=null;runner=runner.getNext()) if (runner.getNext()==null) {runner.setNext(n);nodeCount++;return;}
 		Node<String> runner = this.head;
-		for (int i=0; runner.getNext() != null ;runner = runner.getNext(),i++) if (i==index) {
+		for (int i=0; runner.getNext() != null ;runner = runner.getNext(),i++) if (i==index-1) {
 			n.setNext(runner.getNext());
 			runner.setNext(n);
+			nodeCount++;
 			return;
 		}
 	}
@@ -125,6 +125,7 @@ public class LinkedListOfStrings {
 		Node<String> runner = this.head,back = runner;
 		for (int i=0; i != index ;runner = (back=runner).getNext(),i++) ;
 		back.setNext(runner.getNext());
+		nodeCount--;
 		return runner;
 	}
 	
@@ -138,14 +139,18 @@ public class LinkedListOfStrings {
 	// Replaces the element at the specified position in this list with the specified element.
 	// Throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
 	public Node<String> set(int index, Node<String> n) {
+		if (index < 0) throw new IndexOutOfBoundsException("Index must be positive.");
+		if (index >= this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
+		Node<String> runner = this.head,prev=runner;
+		for (int i=0; runner.getNext() != null ;prev=runner,runner = runner.getNext(),i++) if (i==index) {
+			prev.setNext(n).setNext(runner.getNext());
+			return runner;
+		}
 		return null;
 	}
 	
 	// Returns the number of elements in this collection.
 	public int size() {
 		return nodeCount;
-	}
-	
-
-	
+	}	
 }
