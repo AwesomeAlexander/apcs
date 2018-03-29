@@ -1,6 +1,8 @@
 package algorithms.linkedlists;
 
-import utils.Node;
+/**
+ * @author Alexander Ng
+ */
 
 public class LinkedListOfStrings {
 
@@ -83,9 +85,9 @@ public class LinkedListOfStrings {
 	// Throws IndexOutOfBoundsException - if the index is out of range (index < 0 || index >= size())
 	public void add(int index, Node<String> n) {
 		if (index < 0) throw new IndexOutOfBoundsException("Index must be positive.");
-		if (index > this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
+		if (index >= this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
 		if (index == 0) {n.setNext(head);this.head = n;nodeCount++;return;}
-		if (index == this.size()) for (Node<String> runner=this.head;runner!=null;runner=runner.getNext()) if (runner.getNext()==null) {runner.setNext(n);nodeCount++;return;}
+		// if (index == this.size()) for (Node<String> runner=this.head;runner!=null;runner=runner.getNext()) if (runner.getNext()==null) {runner.setNext(n);nodeCount++;return;}
 		Node<String> runner = this.head;
 		for (int i=0; runner.getNext() != null ;runner = runner.getNext(),i++) if (i==index-1) {
 			n.setNext(runner.getNext());
@@ -123,6 +125,7 @@ public class LinkedListOfStrings {
 		if (index < 0) throw new IndexOutOfBoundsException("Index must be positive.");
 		if (index >= this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
 		Node<String> runner = this.head,back = runner;
+		if (index == 0) {this.head = this.head.getNext();nodeCount--;return runner;}
 		for (int i=0; i != index ;runner = (back=runner).getNext(),i++) ;
 		back.setNext(runner.getNext());
 		nodeCount--;
@@ -142,8 +145,8 @@ public class LinkedListOfStrings {
 		if (index < 0) throw new IndexOutOfBoundsException("Index must be positive.");
 		if (index >= this.size()) throw new IndexOutOfBoundsException("Index is greater than list length.");
 		Node<String> runner = this.head,prev=runner;
-		for (int i=0; runner.getNext() != null ;prev=runner,runner = runner.getNext(),i++) if (i==index) {
-			prev.setNext(n).setNext(runner.getNext());
+		for (int i=0; runner.getNext() != null ;prev=runner,runner = runner.getNext(),i++) if (i==index-1) {
+			prev.setNext(n);n.setNext(runner.getNext());
 			return runner;
 		}
 		return null;

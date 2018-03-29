@@ -1,7 +1,5 @@
 package algorithms.linkedlists;
 
-import utils.Node;
-
 public class LinkedListTester {
 
 	public static void main(String[] args) {
@@ -26,7 +24,10 @@ public class LinkedListTester {
 		System.out.println(myLinkedList);
 		System.out.println("Size: "+myLinkedList.size());
 
-		myLinkedList.add(10,new Node<String>("NewEnd"));
+
+		System.out.println(myLinkedList.get(6).value);
+
+		System.out.println("Removing item: "+myLinkedList.remove(0));
 		System.out.println(myLinkedList);
 		System.out.println("Size: "+myLinkedList.size());
 
