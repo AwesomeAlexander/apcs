@@ -1,5 +1,7 @@
 package algorithms.linkedlists;
 
+import utils.Node;
+
 /**
  * @author Alexander Ng
  */

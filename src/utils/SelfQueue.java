@@ -1,4 +1,4 @@
-package algorithms.adts;
+package utils;
 
 /**
  * SelfQueue
@@ -16,12 +16,12 @@ public class SelfQueue<E> {
 	}
 
 	E dequeue() {
-		if (this.head = null || this.head.getNext() == null) return null;
-		return this.head = this.head.getNext();
+		if (this.head == null || this.head.getNext() == null) return null;
+		return (this.head = this.head.getNext()).value;
 	}
 
 	E peek() {
-		if (this.head = null || this.head.getNext() == null) return null;
-		return this.head;
+		if (this.head == null || this.head.getNext() == null) return null;
+		return this.head.value;
 	}
 }

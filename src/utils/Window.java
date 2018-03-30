@@ -57,7 +57,8 @@ import javax.swing.SwingUtilities;
 /**
  * Window is a lightweight graphics library that makes it much easier to
  * build interactive games and simulations with Java.
- * downloaded from apcs.io
+ * Downloaded from apcs.io
+ * @author Keshav Saharia
  */
  public class Window extends JApplet {
 	// Serial version UID

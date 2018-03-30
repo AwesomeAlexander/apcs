@@ -8,11 +8,11 @@ public class SortLibrary {
 		// Test arrays you can use to check your sorts.
 		// They represent common arrangements: random, already sorted, reversed, mostly sorted
 		int[] random = new int[]{33,94,9,40,77,82,47,15,51,64,76,28,2,85,11};
-		int[] alreadySorted = new int[]{2,9,11,15,28,33,40,47,51,64,76,77,82,85,94};
-		int[] reversed = new int[]{94,85,82,77,76,64,51,47,40,33,28,15,11,9,2};
-		int[] mostlySorted = new int[]{2,85,11,15,28,33,47,40,51,64,76,77,82,9,94};
-		int[] longerArray = ArrayImporter.readArrayFile("smallArray.txt"); 
-		int[] myCustomTest = new int[]{15, 23, 42, 4, 8, 16, 1};	
+		// int[] alreadySorted = new int[]{2,9,11,15,28,33,40,47,51,64,76,77,82,85,94};
+		// int[] reversed = new int[]{94,85,82,77,76,64,51,47,40,33,28,15,11,9,2};
+		// int[] mostlySorted = new int[]{2,85,11,15,28,33,47,40,51,64,76,77,82,9,94};
+		// int[] longerArray = ArrayImporter.readArrayFile("smallArray.txt"); 
+		// int[] myCustomTest = new int[]{15, 23, 42, 4, 8, 16, 1};	
 		
 		int[] arrayToSort = random;
 		int[] checkerArrayToSort = Arrays.copyOf(arrayToSort, arrayToSort.length);

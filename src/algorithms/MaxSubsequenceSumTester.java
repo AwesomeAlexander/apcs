@@ -34,7 +34,7 @@ public final class MaxSubsequenceSumTester
             }
 		long stopTime = System.currentTimeMillis(); 
 		long timeForCubicMaxSubSum = (stopTime - startTime);
-		//System.out.println("Time for Cubic Max Sub Sum " + timeForCubicMaxSubSum + " ms");
+		System.out.println("Time for Cubic Max Sub Sum " + timeForCubicMaxSubSum + " ms");
 		
         return maxSum;
     }
@@ -104,7 +104,7 @@ public final class MaxSubsequenceSumTester
      */
     public static void main( String [ ] args )
     {
-        int[] shortArray = { 7, -4, 5, 1, -12, 8, 10, -1, 22, -5 };
+        //int[] shortArray = { 7, -4, 5, 1, -12, 8, 10, -1, 22, -5 };
         int[] longArray = getRandArray(5000); // modify the parameter for diff. size
         
         int[] arrayToTest = longArray; // change this to test a longer array

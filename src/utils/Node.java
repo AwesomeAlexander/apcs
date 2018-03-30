@@ -1,4 +1,4 @@
-package algorithms.adts;
+package utils;
 
 /**
  * Node
