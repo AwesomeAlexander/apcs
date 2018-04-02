@@ -95,6 +95,16 @@ public class BinaryTree<E extends Comparable<E>> {
 		return this.find(item) != null;
 	}
 
+	public void doToRange(E start,E end,Function<TreeNode<E>,Void> doThis) {this.doToRange(this.root,start,end,doThis);}
+    public void doToRange(TreeNode<E> root,E start,E end,Function<TreeNode<E>,Void> doThis) {
+        if (root == null) return;
+        if (start.compareTo(root.item)<=0) this.doToRange(root.left, start, end, doThis);
+        if (start.compareTo(root.item)<=0 && end.compareTo(root.item)>=0) doThis.run(root);
+		if (end.compareTo(root.item)>=0) this.doToRange(root.right, start, end, doThis);
+	}
+	
+	/* Size methods, apply to whole tree */
+
 	public int size() {return this.size(this.root);}
 	public int size(TreeNode<E> root) {return this.complexSizeBool(this.root,(TreeNode<E> e)->true);}
 	public int complexSizeBool(TreeNode<E> root,Function<TreeNode<E>,Boolean> tester) {return this.complexSize(root, (TreeNode<E> e)->(tester.run(e)?1:0) );}

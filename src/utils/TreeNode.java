@@ -3,7 +3,7 @@ package utils;
 /**
  * TreeNode
  */
-public class TreeNode<T extends Comparable<?>> {
+public class TreeNode<T> {
     public TreeNode<T> left, right;
     public T item;
 
