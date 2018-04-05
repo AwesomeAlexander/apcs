@@ -1,6 +1,8 @@
 package algorithms.chap9webcat2;
 
-public class Person {
+import java.lang.Comparable; // is dis right?
+
+public class Person implements Comparable {
 	
 	public String firstName;
 	public String lastName;
@@ -19,6 +21,17 @@ public class Person {
 		this.birthYear = birthYear;
 	}
 	
+	@Override
+	public int compareTo(Person o) {
+		if (!this.firstName.equals(o.firstName)) return this.firstName.compareTo(o.firstName);
+		if (!this.lastName.equals(o.lastName)) return this.lastName.compareTo(o.lastName);
+		if (!this.birthDay.equals(o.birthDay)) return this.birthDay.compareTo(o.birthDay);
+		if (!this.birthMonth.equals(o.birthMonth)) return this.birthMonth.compareTo(o.birthMonth);
+		if (!this.birthYear.equals(o.birthYear)) return this.birthYear.compareTo(o.birthYear);
+		return 0;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if ( ! (obj instanceof Person))
 			return false;

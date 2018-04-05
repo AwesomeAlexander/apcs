@@ -46,21 +46,24 @@ public class BinaryTree<E extends Comparable<E>> {
 		this.root = root;
 	}
 
-	public void insert(E item) {
-		TreeNode<E> n = new TreeNode<E>(item);
-		if (this.root == null) {root=n;return;}
-		for (TreeNode<E> runner=this.root;;) {
-			if (n.item.compareTo(runner.item) >= 0) {
+	public void insert(E item) {this.insert(this.root,new TreeNode<E>(item),true);}
+	public boolean insert(TreeNode<E> root,TreeNode<E> n,boolean allowRepeats) {insert(root,n,(E a,E b)->a.compareTo(b),allowRepeats);}
+	public boolean insert(TreeNode<E> root,TreeNode<E> n,CompareTwo<E> comparer,boolean allowRepeats) {
+		if (root == null) {root=n;return;}
+		for (TreeNode<E> runner=root;;) {
+			if (comparer.compare(n,root) >= 0) {
+				if (!allowRepeats && n.item.equals(runner.item)) return;
+
 				if (runner.right == null) {
 					runner.right = n;
-					return;
+					return true;
 				} else {
 					runner = runner.right;
 				}
 			} else {
 				if (runner.left == null) {
 					runner.left = n;
-					return;
+					return true;
 				} else {
 					runner = runner.left;
 				}

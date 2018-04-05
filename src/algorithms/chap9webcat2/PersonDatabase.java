@@ -54,9 +54,19 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return true if person is added, false otherwise
 	 */
 	public boolean put(Person p) {
-		//hint: create two private put methods
-		// for each of the trees and call
-		// them here
+		return
+			this.insert(rootOfBirthDateTree,new TreeNode<Person>(p),
+				(Person a,Person b) -> {
+					// Compare based on Birth Date
+
+				}
+			,false) //should be the same result as
+			|| this.insert(rootOfNameTree,new TreeNode<Person>(p),
+				(Person a,Person b) -> {
+					// Compare based on Name
+					
+				}
+			,false);
 	}
 
 	/**
@@ -68,7 +78,7 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(String firstName, String lastName) {
-
+		
 	}
 
 	/**
