@@ -1,8 +1,9 @@
 package algorithms.chap9webcat2;
 
 import java.lang.Comparable; // is dis right?
+import utils.CompareTwo;
 
-public class Person implements Comparable {
+public class Person implements Comparable<Person> {
 	
 	public String firstName;
 	public String lastName;
@@ -11,6 +12,7 @@ public class Person implements Comparable {
 	public int birthYear;
 	public Person father;
 	public Person mother;
+
 	
 	public Person(String firstName, String lastName, 
 			int birthDay, int birthMonth, int birthYear) {
@@ -25,9 +27,9 @@ public class Person implements Comparable {
 	public int compareTo(Person o) {
 		if (!this.firstName.equals(o.firstName)) return this.firstName.compareTo(o.firstName);
 		if (!this.lastName.equals(o.lastName)) return this.lastName.compareTo(o.lastName);
-		if (!this.birthDay.equals(o.birthDay)) return this.birthDay.compareTo(o.birthDay);
-		if (!this.birthMonth.equals(o.birthMonth)) return this.birthMonth.compareTo(o.birthMonth);
-		if (!this.birthYear.equals(o.birthYear)) return this.birthYear.compareTo(o.birthYear);
+		if (this.birthDay!=o.birthDay) return this.birthDay-o.birthDay;
+		if (this.birthMonth!=o.birthMonth) return this.birthMonth-o.birthMonth;
+		if (this.birthYear!=o.birthYear) return this.birthYear-o.birthYear;
 		return 0;
 	}
 
@@ -50,4 +52,28 @@ public class Person implements Comparable {
 				+ birthDay + "/" + birthMonth + "/" + birthYear;
 	}
 	
+	public static CompareTwo<Person> compareByName = new CompareTwo<Person>() {
+		public int compare(Person a,Person b) {
+			// Compare based on Name, sorting secondarily by birth
+			if (!a.firstName.equals(b.firstName)) return a.firstName.compareTo(b.firstName);
+			if (!a.lastName.equals(b.lastName)) return a.lastName.compareTo(b.lastName);
+			if (a.birthDay!=b.birthDay) return a.birthDay-b.birthDay;
+			if (a.birthMonth!=b.birthMonth) return a.birthMonth-b.birthMonth;
+			if (a.birthYear!=b.birthYear) return a.birthYear-b.birthYear;
+			return 0;
+		}
+	};
+
+	public static CompareTwo<Person> compareByBirth = new CompareTwo<Person>() {
+		public int compare(Person a,Person b) {
+			// Compare based on Birth, sorting secondarily by name
+			if (a.birthDay!=b.birthDay) return a.birthDay-b.birthDay;
+			if (a.birthMonth!=b.birthMonth) return a.birthMonth-b.birthMonth;
+			if (a.birthYear!=b.birthYear) return a.birthYear-b.birthYear;
+			if (!a.firstName.equals(b.firstName)) return a.firstName.compareTo(b.firstName);
+			if (!a.lastName.equals(b.lastName)) return a.lastName.compareTo(b.lastName);
+			return 0;
+		}
+	};
+
 }

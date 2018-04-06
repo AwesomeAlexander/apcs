@@ -9,6 +9,28 @@ import utils.BinaryTree;
 
 public class PersonDatabase extends BinaryTree<Person> {
 
+	// Testing
+	public static void main(String[] args) {
+		PersonDatabase pdb = new PersonDatabase();
+		
+		pdb.put(new Person("F1","L1",1,1,2000));
+		pdb.put(new Person("F2","L2",1,2,2000));
+		pdb.put(new Person("F1","L2",1,1,2000));
+		pdb.put(new Person("F2","L1",1,2,2000));
+		pdb.put(new Person("F3","L3",1,1,2000));
+		pdb.put(new Person("F3","L1",1,4,2000));
+		pdb.put(new Person("F1","L1",1,1,2000));
+		pdb.put(new Person("F2","L2",1,1,2000));
+		pdb.put(new Person("F4","L1",1,5,2000));
+		pdb.put(new Person("F3","L1",1,1,2000));
+		pdb.put(new Person("F1","L2",1,3,2000));
+		pdb.put(new Person("F1","L3",1,1,2000));
+		pdb.put(new Person("F1","L2",1,1,2000));
+
+		System.out.println(pdb.find(1,2,2000));
+		System.out.println(pdb.find("F2","F2"));
+	}
+
 	/**
 	 * This TreeNode<Person> is the root of a tree of Person
 	 * objects that is sorted by last
@@ -54,19 +76,8 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return true if person is added, false otherwise
 	 */
 	public boolean put(Person p) {
-		return
-			this.insert(rootOfBirthDateTree,new TreeNode<Person>(p),
-				(Person a,Person b) -> {
-					// Compare based on Birth Date
-
-				}
-			,false) //should be the same result as
-			|| this.insert(rootOfNameTree,new TreeNode<Person>(p),
-				(Person a,Person b) -> {
-					// Compare based on Name
-					
-				}
-			,false);
+		return this.insert(rootOfNameTree,new TreeNode<Person>(p),Person.compareByName,false)
+			|| this.insert(rootOfBirthDateTree,new TreeNode<Person>(p),Person.compareByBirth,false);
 	}
 
 	/**
@@ -78,7 +89,10 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(String firstName, String lastName) {
-		
+		return this.getListOf(rootOfNameTree, new ArrayList<Person>(), (Person p) -> {
+			System.out.println(p);
+			return (p.firstName+p.lastName).equals(firstName+lastName);
+		});
 	}
 
 	/**
@@ -91,9 +105,11 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(int birthDay, int birthMonth, int birthYear) {
-
+		return this.getListOf(rootOfBirthDateTree, new ArrayList<Person>(), (Person p) -> {
+			System.out.println(p);
+			return p.birthDay==birthDay && p.birthMonth==birthMonth && p.birthYear==birthYear;
+		});
 	}
-	
 	
 	//***** For testing purposes
 	public TreeNode<Person> getNameRoot() {

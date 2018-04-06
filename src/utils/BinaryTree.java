@@ -1,5 +1,10 @@
 package utils;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.List;
+
 /**
  * SelfBinaryTree
  */
@@ -47,12 +52,12 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	public void insert(E item) {this.insert(this.root,new TreeNode<E>(item),true);}
-	public boolean insert(TreeNode<E> root,TreeNode<E> n,boolean allowRepeats) {insert(root,n,(E a,E b)->a.compareTo(b),allowRepeats);}
+	public boolean insert(TreeNode<E> root,TreeNode<E> n,boolean allowRepeats) {return insert(root,n,(E a,E b)->a.compareTo(b),allowRepeats);}
 	public boolean insert(TreeNode<E> root,TreeNode<E> n,CompareTwo<E> comparer,boolean allowRepeats) {
-		if (root == null) {root=n;return;}
+		if (root == null) {root=n;return true;}
 		for (TreeNode<E> runner=root;;) {
-			if (comparer.compare(n,root) >= 0) {
-				if (!allowRepeats && n.item.equals(runner.item)) return;
+			if (comparer.compare(n.item,root.item) >= 0) {
+				if (!allowRepeats && n.item.equals(runner.item)) return false;
 
 				if (runner.right == null) {
 					runner.right = n;
@@ -73,24 +78,26 @@ public class BinaryTree<E extends Comparable<E>> {
 
 	public TreeNode<E> find(E item) {
 		// Recursive
-		return find(item,this.root);
+		return find(this.root,item);
 
-		// Iterative
+		// Iterative, Simple
 		/* {
 			TreeNode<E> runner = this.root;
 			while (runner != null) {
-				if (item.compareTo(runner.item) < 0) return runner;
+				if (item.equals(runner.item)) return runner;
 				if (item.compareTo(runner.item) > 0) runner = runner.right;
 				else runner = runner.left;
 			}
 			return null;
 		} */
 	}
-	public TreeNode<E> find(E item,TreeNode<E> root) {
+
+	public TreeNode<E> find(TreeNode<E> root,E item) {return this.find(root, item, (E a,E b)->a.compareTo(b) );}
+	public TreeNode<E> find(TreeNode<E> root,E item,CompareTwo<E> comparer) {
 		if (root == null) return null;
-		if (item.compareTo(root.item) == 0) return root;
-		if (item.compareTo(root.item) > 0) return find(item,root.right);
-		if (item.compareTo(root.item) < 0) return find(item,root.left);
+		if (comparer.compare(item,root.item) == 0) return root;
+		if (comparer.compare(item,root.item) > 0) return find(root.right,item,comparer);
+		if (comparer.compare(item,root.item) < 0) return find(root.left,item,comparer);
 		return null; // Should never reach.
 	}
 
@@ -98,22 +105,41 @@ public class BinaryTree<E extends Comparable<E>> {
 		return this.find(item) != null;
 	}
 
-	public void doToRange(E start,E end,Function<TreeNode<E>,Void> doThis) {this.doToRange(this.root,start,end,doThis);}
-    public void doToRange(TreeNode<E> root,E start,E end,Function<TreeNode<E>,Void> doThis) {
+	// Apply some function to all
+	public void applyAll(Consumer<TreeNode<E>> doThis) {this.applyAll(this.root,doThis);}
+	public void applyAll(TreeNode<E> root,Consumer<TreeNode<E>> doThis) {
+		if (root == null) return;
+		applyAll(root.left, doThis);
+		doThis.accept(root);
+		applyAll(root.right, doThis);
+	}
+
+	// Get a list of items in the tree, determined by the predicate
+	public List<E> getListOf(List<E> list,Predicate<E> tester) {return this.getListOf(this.root, list, tester);}
+	public List<E> getListOf(TreeNode<E> root,List<E> list,Predicate<E> tester) {
+		this.applyAll(root, (TreeNode<E> n)->{
+			if (tester.test(n.item)) list.add(n.item);
+		});
+		return list;
+	}
+
+	// Do some function to a range
+	public void doToRange(E start,E end,Consumer<TreeNode<E>> doThis) {this.doToRange(this.root,start,end,doThis);}
+    public void doToRange(TreeNode<E> root,E start,E end,Consumer<TreeNode<E>> doThis) {
         if (root == null) return;
         if (start.compareTo(root.item)<=0) this.doToRange(root.left, start, end, doThis);
-        if (start.compareTo(root.item)<=0 && end.compareTo(root.item)>=0) doThis.run(root);
+        if (start.compareTo(root.item)<=0 && end.compareTo(root.item)>=0) doThis.accept(root);
 		if (end.compareTo(root.item)>=0) this.doToRange(root.right, start, end, doThis);
 	}
 	
 	/* Size methods, apply to whole tree */
 
 	public int size() {return this.size(this.root);}
-	public int size(TreeNode<E> root) {return this.complexSizeBool(this.root,(TreeNode<E> e)->true);}
-	public int complexSizeBool(TreeNode<E> root,Function<TreeNode<E>,Boolean> tester) {return this.complexSize(root, (TreeNode<E> e)->(tester.run(e)?1:0) );}
+	public int size(TreeNode<E> root) {return this.complexSizeBool(this.root,(TreeNode<E> n)->true);}
+	public int complexSizeBool(TreeNode<E> root,Predicate<TreeNode<E>> tester) {return this.complexSize(root, (TreeNode<E> n)->(tester.test(n)?1:0) );}
 	public int complexSize(TreeNode<E> root,Function<TreeNode<E>,Integer> tester) {
 		if (root == null) return 0;
-		return this.complexSize(root.left,tester) + tester.run(root) + this.complexSize(root.right,tester);
+		return this.complexSize(root.left,tester) + tester.apply(root) + this.complexSize(root.right,tester);
 	}
 
 	public int countElement(E item) {
