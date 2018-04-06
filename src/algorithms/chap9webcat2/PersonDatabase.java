@@ -3,33 +3,42 @@ package algorithms.chap9webcat2;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.TreeNode;
 import utils.BinaryTree;
 
-
-public class PersonDatabase extends BinaryTree<Person> {
+/**
+ * @author Alexander Ng
+ */
+public class PersonDatabase {
 
 	// Testing
-	public static void main(String[] args) {
+	/* public static void main(String[] args) {
 		PersonDatabase pdb = new PersonDatabase();
 		
+		// Placing Objects
 		pdb.put(new Person("F1","L1",1,1,2000));
-		pdb.put(new Person("F2","L2",1,2,2000));
-		pdb.put(new Person("F1","L2",1,1,2000));
-		pdb.put(new Person("F2","L1",1,2,2000));
-		pdb.put(new Person("F3","L3",1,1,2000));
-		pdb.put(new Person("F3","L1",1,4,2000));
-		pdb.put(new Person("F1","L1",1,1,2000));
-		pdb.put(new Person("F2","L2",1,1,2000));
-		pdb.put(new Person("F4","L1",1,5,2000));
-		pdb.put(new Person("F3","L1",1,1,2000));
 		pdb.put(new Person("F1","L2",1,3,2000));
 		pdb.put(new Person("F1","L3",1,1,2000));
-		pdb.put(new Person("F1","L2",1,1,2000));
 
-		System.out.println(pdb.find(1,2,2000));
-		System.out.println(pdb.find("F2","F2"));
-	}
+		pdb.put(new Person("F2","L2",1,1,2000));
+		pdb.put(new Person("F2","L2",1,2,2000));
+		pdb.put(new Person("F2","L2",1,3,2000));
+		pdb.put(new Person("F2","L2",1,4,2000));
+
+		pdb.put(new Person("F3","L1",1,1,2000));
+		pdb.put(new Person("F3","L2",1,1,2000));
+
+		pdb.put(new Person("F3","L1",1,4,2000));
+
+		pdb.put(new Person("F4","L1",1,1,2000));
+		pdb.put(new Person("F4","L1",1,5,2000));
+		
+		System.out.println(pdb.put(new Person("F2","L2",1,1,2000))); // Testing duplicates
+
+		System.out.println(pdb.find(1,1,2000)); // Should yield 5
+		System.out.println(pdb.find("F2","L2")); // Should yield 3
+	} */
+
+	
 
 	/**
 	 * This TreeNode<Person> is the root of a tree of Person
@@ -38,7 +47,8 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * This tree allows duplicate names (as long as
 	 * the birth dates are different).
 	 */
-	private TreeNode<Person> rootOfNameTree;
+	// private TreeNode<Person> rootOfNameTree;
+	BinaryTree<Person> nameTree = new BinaryTree<Person>();
 	
 	/**
 	 * This TreeNode<Person> is the root of a tree 
@@ -47,14 +57,15 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * birth dates (as long as the names are
 	 * different).
 	 */
-	private TreeNode<Person> rootOfBirthDateTree;
+	// private TreeNode<Person> rootOfBirthDateTree;
+	BinaryTree<Person> dateTree = new BinaryTree<Person>();
 
 	/**
 	 * The number of nodes in the tree.
 	 * Both trees should have the same
 	 * number of nodes.
 	 */
-	private int size;
+	// private int size;
 	
 	
 	/**
@@ -63,7 +74,8 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return number of Persons
 	 */
 	public int size() {
-		return size;
+		if (nameTree.size()!=dateTree.size()) System.out.println("YOU DUN DID A BAD!!!");
+		return nameTree.size();
 	}
 	
 	/**
@@ -76,8 +88,8 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return true if person is added, false otherwise
 	 */
 	public boolean put(Person p) {
-		return this.insert(rootOfNameTree,new TreeNode<Person>(p),Person.compareByName,false)
-			|| this.insert(rootOfBirthDateTree,new TreeNode<Person>(p),Person.compareByBirth,false);
+		return nameTree.insert(p,Person.compareByName,false)
+			&& dateTree.insert(p,Person.compareByBirth,false);
 	}
 
 	/**
@@ -89,9 +101,8 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(String firstName, String lastName) {
-		return this.getListOf(rootOfNameTree, new ArrayList<Person>(), (Person p) -> {
-			System.out.println(p);
-			return (p.firstName+p.lastName).equals(firstName+lastName);
+		return nameTree.getListOf(new ArrayList<Person>(), (Person p) -> {
+			return p.firstName.equals(firstName) && p.lastName.equals(lastName);
 		});
 	}
 
@@ -105,20 +116,9 @@ public class PersonDatabase extends BinaryTree<Person> {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(int birthDay, int birthMonth, int birthYear) {
-		return this.getListOf(rootOfBirthDateTree, new ArrayList<Person>(), (Person p) -> {
-			System.out.println(p);
+		return dateTree.getListOf(new ArrayList<Person>(), (Person p) -> {
 			return p.birthDay==birthDay && p.birthMonth==birthMonth && p.birthYear==birthYear;
 		});
 	}
-	
-	//***** For testing purposes
-	public TreeNode<Person> getNameRoot() {
-		return rootOfNameTree;
-	}
-	
-	public TreeNode<Person> getBDayRoot() {
-		return rootOfBirthDateTree;
-	}
-	
 
 }

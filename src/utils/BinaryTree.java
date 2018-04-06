@@ -6,7 +6,8 @@ import java.util.function.Predicate;
 import java.util.List;
 
 /**
- * SelfBinaryTree
+ * Binary Tree. Chock full of implementable, futureproofed generic functions based on functional interfaces (lambdas).
+ * @author Alexander Ng
  */
 public class BinaryTree<E extends Comparable<E>> {
 
@@ -52,9 +53,10 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 
 	public void insert(E item) {this.insert(this.root,new TreeNode<E>(item),true);}
+	public boolean insert(E item,CompareTwo<E> comparer,boolean allowRepeats) {return insert(this.root,new TreeNode<E>(item),comparer,allowRepeats);}
 	public boolean insert(TreeNode<E> root,TreeNode<E> n,boolean allowRepeats) {return insert(root,n,(E a,E b)->a.compareTo(b),allowRepeats);}
 	public boolean insert(TreeNode<E> root,TreeNode<E> n,CompareTwo<E> comparer,boolean allowRepeats) {
-		if (root == null) {root=n;return true;}
+		if (this.root == null) {this.root=n;return true;} // TODO: fix problem of root being null
 		for (TreeNode<E> runner=root;;) {
 			if (comparer.compare(n.item,root.item) >= 0) {
 				if (!allowRepeats && n.item.equals(runner.item)) return false;
