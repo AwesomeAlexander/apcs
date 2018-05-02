@@ -1,4 +1,4 @@
-package algorithms.chap9webcat2;
+package algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,11 @@ import utils.BinaryTree;
  */
 public class PersonDatabase {
 
-	// Testing
-	/* public static void main(String[] args) {
+	// Main for testing purposes
+	public static void main(String[] args) {
 		PersonDatabase pdb = new PersonDatabase();
 		
-		// Placing Objects
+		// Placing Objects - You can edit these to vary test results
 		pdb.put(new Person("F1","L1",1,1,2000));
 		pdb.put(new Person("F1","L2",1,3,2000));
 		pdb.put(new Person("F1","L3",1,1,2000));
@@ -32,11 +32,14 @@ public class PersonDatabase {
 		pdb.put(new Person("F4","L1",1,1,2000));
 		pdb.put(new Person("F4","L1",1,5,2000));
 		
-		System.out.println(pdb.put(new Person("F2","L2",1,1,2000))); // Testing duplicates
+		// Testing duplicates - should not put this one
+		// Should print 'false', indicating it isn't added
+		System.out.println(pdb.put(new Person("F2","L2",1,1,2000)));
 
-		System.out.println(pdb.find(1,1,2000)); // Should yield 5
-		System.out.println(pdb.find("F2","L2")); // Should yield 3
-	} */
+		// Prints results of <PersonDatabase>.find()
+		System.out.println(pdb.find(1,1,2000)); // Should yield 6 elements
+		System.out.println(pdb.find("F2","L2")); // Should yield 4 elements
+	}
 
 	
 

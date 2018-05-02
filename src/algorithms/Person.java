@@ -1,4 +1,4 @@
-package algorithms.chap9webcat2;
+package algorithms;
 
 import java.lang.Comparable; // is dis right?
 import utils.CompareTwo;
