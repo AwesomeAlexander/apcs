@@ -267,13 +267,6 @@ public abstract class BasicObject {
 		this.parent.repaint();
 	}
 
-	/**
-	 * Interaction with the user
-	 */
-	public void userInteract() {
-
-	}
-
 	// Movement
 
 	/**
