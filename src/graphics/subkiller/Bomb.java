@@ -1,6 +1,8 @@
 package graphics.subkiller;
 
-import utils.BasicObject;
+import utils.BasicEntity;
+import utils.Drawable;
+import utils.Moveable;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,7 +10,7 @@ import java.awt.Graphics;
 /**
  * Bomb
  */
-public class Bomb extends BasicObject {
+public class Bomb extends BasicEntity implements Moveable, Drawable {
 
 	// public Bomb() {super();}
 	public Bomb(int x,int y) {super(x, y, 10, Color.BLACK);}

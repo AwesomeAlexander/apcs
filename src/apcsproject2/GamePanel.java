@@ -1,5 +1,6 @@
 package apcsproject2;
 
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -7,6 +8,8 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
     static final long serialVersionUID = 42L;
+
+    ArrayList<GameEntity> entities;
 
     // TODO: stuffs
 }

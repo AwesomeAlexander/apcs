@@ -1,6 +1,5 @@
 package utils;
 
-import java.awt.Graphics;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ import javax.swing.JPanel;
  * @author Alexander Ng
  *
  */
-public abstract class BasicObject {
+public abstract class BasicEntity {
 
 	// Variables
 	protected int x, y, size, r, b, g, sx, sy;
@@ -26,7 +25,7 @@ public abstract class BasicObject {
 	/**
 	 * Basic Constructor
 	 */
-	public BasicObject() {
+	public BasicEntity() {
 
 	}
 
@@ -38,7 +37,7 @@ public abstract class BasicObject {
 	 * @param y
 	 *            - initial y position, int
 	 */
-	public BasicObject(int x, int y) {
+	public BasicEntity(int x, int y) {
 		this(x,y,10);
 	}
 
@@ -52,7 +51,7 @@ public abstract class BasicObject {
 	 * @param size
 	 *            - initial size, int
 	 */
-	public BasicObject(int x, int y, int size) {
+	public BasicEntity(int x, int y, int size) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
@@ -70,7 +69,7 @@ public abstract class BasicObject {
 	 * @param color
 	 * 			  - initial color, Color
 	 */
-	public BasicObject(int x, int y, int size, Color color) {
+	public BasicEntity(int x, int y, int size, Color color) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
@@ -87,7 +86,7 @@ public abstract class BasicObject {
 	 * @param speed
 	 *            - initial speed, double
 	 */
-	public BasicObject(int x, int y, double speed) {
+	public BasicEntity(int x, int y, double speed) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -105,7 +104,7 @@ public abstract class BasicObject {
 	 * @param direction
 	 *            - initial direction, double
 	 */
-	public BasicObject(int x, int y, double speed, double direction) {
+	public BasicEntity(int x, int y, double speed, double direction) {
 		this.x = x;
 		this.y = y;
 		this.speed = speed;
@@ -124,7 +123,7 @@ public abstract class BasicObject {
 	 * @param speed
 	 *            - initial speed, double
 	 */
-	public BasicObject(int x, int y, int size, double speed) {
+	public BasicEntity(int x, int y, int size, double speed) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
@@ -145,7 +144,7 @@ public abstract class BasicObject {
 	 * @param color
 	 * 			  - initial color, Color
 	 */
-	public BasicObject(int x, int y, int size, double speed, Color color) {
+	public BasicEntity(int x, int y, int size, double speed, Color color) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
@@ -165,7 +164,7 @@ public abstract class BasicObject {
 	 * @param sy
 	 *            - initial y speed, int
 	 */
-	public BasicObject(int x, int y, int sx, int sy) {
+	public BasicEntity(int x, int y, int sx, int sy) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -186,7 +185,7 @@ public abstract class BasicObject {
 	 * @param size
 	 *            - initial size, int
 	 */
-	public BasicObject(int x, int y, int sx, int sy, int size) {
+	public BasicEntity(int x, int y, int sx, int sy, int size) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -208,7 +207,7 @@ public abstract class BasicObject {
 	 * @param color
 	 *            - initial color, String
 	 */
-	public BasicObject(int x, int y, int sx, int sy, Color color) {
+	public BasicEntity(int x, int y, int sx, int sy, Color color) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -234,7 +233,7 @@ public abstract class BasicObject {
 	 * @param g
 	 *            - initial green value, int 0-255
 	 */
-	public BasicObject(int x, int y, int sx, int sy, int r, int b, int g) {
+	public BasicEntity(int x, int y, int sx, int sy, int r, int b, int g) {
 		this.x = x;
 		this.y = y;
 		this.sx = sx;
@@ -242,29 +241,6 @@ public abstract class BasicObject {
 		this.r = r;
 		this.b = b;
 		this.g = g;
-	}
-
-	// Abstract Methods
-
-	/**
-	 * Draws the object
-	 */
-	public abstract void draw(Graphics g);
-
-	/**
-	 * Moves the object
-	 */
-	public abstract void move();
-
-	// Methods
-
-	/**
-	 * Updates the object, Defaults move and draw
-	 * @deprecated
-	 */
-	public void update() {
-		this.move();
-		this.parent.repaint();
 	}
 
 	// Movement
@@ -354,7 +330,7 @@ public abstract class BasicObject {
 	 *            - the other object
 	 * @return - Angle in radians from this object
 	 */
-	public double angleto(BasicObject other) {
+	public double angleto(BasicEntity other) {
 		return Math.atan2(this.y - other.y, this.x - other.x);
 	}
 
@@ -378,7 +354,7 @@ public abstract class BasicObject {
 	 *            - the other object
 	 * @return - Distance from this object
 	 */
-	public double distanceto(BasicObject other) {
+	public double distanceto(BasicEntity other) {
 		return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
 	}
 	
@@ -387,9 +363,9 @@ public abstract class BasicObject {
 	 * @param list - ArrayList of basic objects
 	 * @return - the closest object
 	 */
-	public BasicObject closest(ArrayList<BasicObject> list) {
-		BasicObject closest = list.get(0);
-		for (BasicObject thing : list) {
+	public BasicEntity closest(ArrayList<BasicEntity> list) {
+		BasicEntity closest = list.get(0);
+		for (BasicEntity thing : list) {
 			if (this.distanceto(thing) < this.distanceto(closest)) {
 				closest = thing;
 			}
@@ -402,9 +378,9 @@ public abstract class BasicObject {
 	 * @param list - Array of basic objects
 	 * @return - the closest object
 	 */
-	public BasicObject closest(BasicObject[] list) {
-		BasicObject closest = list[0];
-		for (BasicObject thing : list) {
+	public BasicEntity closest(BasicEntity[] list) {
+		BasicEntity closest = list[0];
+		for (BasicEntity thing : list) {
 			if (this.distanceto(thing) < this.distanceto(closest)) {
 				closest = thing;
 			}

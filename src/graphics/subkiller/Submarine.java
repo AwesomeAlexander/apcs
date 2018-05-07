@@ -1,6 +1,8 @@
 package graphics.subkiller;
 
-import utils.BasicObject;
+import utils.BasicEntity;
+import utils.Drawable;
+import utils.Moveable;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,7 +10,7 @@ import java.awt.Graphics;
 /**
  * Submarine
  */
-public class Submarine extends BasicObject {
+public class Submarine extends BasicEntity implements Moveable, Drawable {
 
 	private boolean direcHorz; // 'goRight'
 	private int destVert; // Where to go vertically
