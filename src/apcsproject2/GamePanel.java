@@ -11,5 +11,5 @@ public class GamePanel extends JPanel {
 
     ArrayList<GameEntity> entities;
 
-    // TODO: stuffs
+    // TODO: stuffs8
 }
