@@ -1,11 +1,11 @@
 package apcsproject2;
 
-import utils.BasicEntity;
 import utils.Drawable;
 
 /**
- * GameEntity
+ * Testing
  */
-public abstract class GameEntity extends BasicEntity implements Drawable {
-    public abstract void interact(GameEntity other);
+public interface GameEntity extends Drawable {
+    public void interact(GameEntity other);
+    public void update();
 }
