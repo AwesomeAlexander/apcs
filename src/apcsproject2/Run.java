@@ -1,7 +1,10 @@
 package apcsproject2;
 
 import java.awt.Color;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 // import java.util.Scanner;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -51,21 +54,75 @@ public class Run {
 		game.requestFocusInWindow();
 		game.timer.start();
 	}
+    
+    /**
+	 * Gives all the Unit types
+	 * @return List of Unit Classes
+	 */
+	static List<Class<? extends Unit>> unitTypes() {
+		ArrayList<Class<? extends Unit>> out = new ArrayList<Class<? extends Unit>>();
+		out.add(WarriorUnit.class);
+		out.add(KamikazeUnit.class);
+		out.add(MusketeerUnit.class);
+		out.add(BruteUnit.class);
+		out.add(CavalryUnit.class);
+		out.add(ArtilleryUnit.class);
+		return out;
+	}
 	
 	/**
 	 * Subroutine for setting up a side's troops based on a map
 	 */
 	public static void setupSide(GamePanel game, GamePlayer owner, char[][] unitMap, int direction, int placex, int placey, int spacingx, int spacingy) {
 		int savex = placex;
+		
+		// Looping through map
 		for (char[] unitLine : unitMap) {
-			for (char unit : unitLine) {
-				switch (unit) {
-					case 'w': game.addUnit(new WarriorUnit(game, owner, placex, placey));break;
-					case 'a': game.addUnit(new ArcherUnit(game, owner, placex, placey));break;
-					case 'c': game.addUnit(new CavalryUnit(game, owner, placex, placey));break;
-					case 'n': break;// adds space
-					case ' ': placex -= spacingx + Unit.SIZE; break;// counteracts
+			for (char unitChar : unitLine) {
+				
+				// For each character in the map...
+				
+				if (unitChar == ' ') continue; // Spaces don't matter. No need to run through types.
+				
+				if (unitChar != 'n') // 'n' skips the following loop
+				
+				// Loop through Unit types, check if character corresponds to any
+				for (Class<? extends Unit> type : unitTypes()) {
+					try {
+						if (unitChar == // Checking if the char is equal to
+							// the 'type' class literal's static field TYPE,
+							// corresponding to a string, turned to a character (e.g. "W" -> 'w')
+							type.getField("TYPE").get(null).toString().toLowerCase().charAt(0)
+							) { // If it matches the type,
+							game.addUnit(
+									type // Create an instance of class, with given parameters
+									.getConstructor(GamePanel.class, GamePlayer.class, int.class, int.class)
+									.newInstance(game, owner, placex, placey)
+									);
+							break; // Found correct type! Exit inner loop, move on to next square
+						}
+					} catch ( // Catching a lot of exceptions
+							NoSuchMethodException |
+							NoSuchFieldException |
+							IllegalAccessException |
+							InvocationTargetException |
+							InstantiationException
+							e) {
+						e.printStackTrace();
+					}
 				}
+				
+				// Previous method
+//				switch (unit) {
+//					case 'w': game.addUnit(new SwordsmanUnit(game, owner, placex, placey));break;
+//					case 'a': game.addUnit(new MusketeerUnit(game, owner, placex, placey));break;
+//					case 'c': game.addUnit(new CavalryUnit(game, owner, placex, placey));break;
+//					case 'b': game.addUnit(new BruteUnit(game, owner, placex, placey));break;
+//					case 'k': game.addUnit(new KamikazeUnit(game, owner, placex, placey));break;
+//					case 'n': break;// adds space
+//					case ' ': placex -= spacingx + Unit.SIZE; break;// counteracts
+//				}
+				
 				placex += spacingx + Unit.SIZE;
 			}
 			placex = savex;

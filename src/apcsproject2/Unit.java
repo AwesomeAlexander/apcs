@@ -10,13 +10,15 @@ import utils.BasicEntity;
  * Unit
  */
 public abstract class Unit extends BasicEntity implements GameEntity {
+	
+	public static String TYPE;
 
     static int SIZE = 25;
     static int // Unit Stats - Default
         HEALTH = 100,
         SPEED = 3,
         DAMAGE = 10,
-        RANGE = 25,
+        RANGE = 50,
         COOLDOWN = 20;
 
     protected GamePlayer owner;
@@ -32,7 +34,7 @@ public abstract class Unit extends BasicEntity implements GameEntity {
         this.type = type;
     };
 
-    public void setStats(int health, int speed, int damage, int range, int cooldown) {
+    public void setStats(double health, double speed, double damage, double range, double cooldown) {
         this.fullhealth = health;
         this.speed = speed;
         this.attackDamage = damage;
@@ -80,12 +82,7 @@ public abstract class Unit extends BasicEntity implements GameEntity {
      * Attacks another Unit.
      */
     public void attack(Unit other) {
-        if (cooldownTimer > 0) return;
-
         other.damage(this.attackDamage);
-        
-        // Reset Cooldown
-        cooldownTimer = this.attackCooldown;
     }
 
     public Point setTarget(Point p) {
@@ -104,6 +101,9 @@ public abstract class Unit extends BasicEntity implements GameEntity {
         if (!(other instanceof Unit)) return;
         Unit o = (Unit) other;
         
-        if (this.distanceto(o) <= this.attackRange && !this.owner.equals(o.owner)) this.attack(o);
+        if (this.distanceto(o) <= this.attackRange && !this.owner.equals(o.owner) && cooldownTimer <= 0) {
+        	this.attack(o);
+        	cooldownTimer = this.attackCooldown; // Reset cooldown
+        }
     }
 }

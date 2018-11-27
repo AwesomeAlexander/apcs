@@ -24,7 +24,7 @@ public class Person implements Comparable<Person> {
 	}
 	
 	@Override
-	public int compareTo(Person o) {
+	public int compareTo(Person o) { // unnecessary now
 		if (!this.firstName.equals(o.firstName)) return this.firstName.compareTo(o.firstName);
 		if (!this.lastName.equals(o.lastName)) return this.lastName.compareTo(o.lastName);
 		if (this.birthDay!=o.birthDay) return this.birthDay-o.birthDay;
@@ -54,12 +54,13 @@ public class Person implements Comparable<Person> {
 	
 	public static CompareTwo<Person> compareByName = new CompareTwo<Person>() {
 		public int compare(Person a,Person b) {
+			//System.out.print("Compare by name yields ");
 			// Compare based on Name, sorting secondarily by birth
 			if (!a.lastName.equals(b.lastName)) return a.lastName.compareTo(b.lastName);
 			if (!a.firstName.equals(b.firstName)) return a.firstName.compareTo(b.firstName);
-			if (a.birthYear!=b.birthYear) return a.birthYear-b.birthYear;
-			if (a.birthMonth!=b.birthMonth) return a.birthMonth-b.birthMonth;
-			if (a.birthDay!=b.birthDay) return a.birthDay-b.birthDay;
+			//if (a.birthYear!=b.birthYear) return a.birthYear-b.birthYear;
+			//if (a.birthMonth!=b.birthMonth) return a.birthMonth-b.birthMonth;
+			//if (a.birthDay!=b.birthDay) return a.birthDay-b.birthDay;
 			return 0;
 
 			// Just sorting by Names, not considering birth dates
@@ -69,12 +70,13 @@ public class Person implements Comparable<Person> {
 
 	public static CompareTwo<Person> compareByBirth = new CompareTwo<Person>() {
 		public int compare(Person a,Person b) {
+			//System.out.print("Compare by birth yields ");
 			// Compare based on Birth, sorting secondarily by name
 			if (a.birthYear!=b.birthYear) return a.birthYear-b.birthYear;
 			if (a.birthMonth!=b.birthMonth) return a.birthMonth-b.birthMonth;
-			if (a.birthDay!=b.birthDay) return a.birthDay-b.birthDay;
-			if (!a.lastName.equals(b.lastName)) return a.lastName.compareTo(b.lastName);
-			if (!a.firstName.equals(b.firstName)) return a.firstName.compareTo(b.firstName);
+			//if (a.birthDay!=b.birthDay) return a.birthDay-b.birthDay;
+			//if (!a.lastName.equals(b.lastName)) return a.lastName.compareTo(b.lastName);
+			//if (!a.firstName.equals(b.firstName)) return a.firstName.compareTo(b.firstName);
 			return 0;
 
 			// Just sorting by Dates, not considering names

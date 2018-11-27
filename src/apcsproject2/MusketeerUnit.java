@@ -3,7 +3,8 @@ package apcsproject2;
 /**
  * ArcherUnit
  */
-public class ArcherUnit extends Unit {
+public class MusketeerUnit extends Unit {
+	public static String TYPE = "M";
 
     static int // Unit Stats
         HEALTH = 50,
@@ -12,8 +13,8 @@ public class ArcherUnit extends Unit {
         RANGE = 200,
         COOLDOWN = 100;
 
-    public ArcherUnit(GamePanel panel, GamePlayer owner, int x, int y) {
-        super(panel, owner, "A", x, y);
+    public MusketeerUnit(GamePanel panel, GamePlayer owner, int x, int y) {
+        super(panel, owner, TYPE, x, y);
         setStats(HEALTH, SPEED, DAMAGE, RANGE, COOLDOWN);
     }
 
@@ -23,7 +24,12 @@ public class ArcherUnit extends Unit {
 
         // Fire Projectile
         // System.out.println("Archer "+this+" firing projectile!");
-        panel.entities.add(new Projectile(owner, x, y, this.angleto(other)+Math.PI, attackDamage, attackRange));
+        panel.entities.add(new Projectile(owner, x, y, this.angleto(other)+Math.PI,
+        		attackDamage,
+        		attackRange/4,
+        		10,
+        		5,
+        		0));
         
         // Reset Cooldown
         cooldownTimer = this.attackCooldown;

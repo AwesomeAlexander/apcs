@@ -2,7 +2,9 @@ package apcsproject2;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.Timer;
 
@@ -43,8 +45,14 @@ public class GamePanel extends JPanel {
 
         if (listener.selectionSquare != null) listener.selectionSquare.draw(g);
 
-        for (GameEntity ge : entities) {
-            ge.draw(g);
+        // ForEach is causing errors, so replaced with manual foreach
+        // doesn't seem to help
+//        for (GameEntity ge : entities) {
+//        	// System.out.println(ge);
+//            ge.draw(g);
+//        }
+        for (Iterator<GameEntity> ge = entities.iterator();ge.hasNext();) {
+        	ge.next().draw(g);
         }
     }
 
@@ -52,9 +60,10 @@ public class GamePanel extends JPanel {
      * Updates the game every tick
      */
     public void update() {
-        tick++;
-
-        // System.out.println("Updating, on tick "+tick);
+    	
+        tick++;// System.out.println("Updating, on tick "+tick);
+        
+        // System.out.println(listener.selected); // Debugging, printing selected troops
 
         for (int i=0;i<entities.size();i++) {
             GameEntity ge = entities.get(i);
@@ -65,8 +74,11 @@ public class GamePanel extends JPanel {
                 ge.interact(entities.get(j));
             }
 
-            if ((ge instanceof Unit && ((Unit)ge).health <= 0) || (ge instanceof Projectile && ((Projectile)ge).health <= 0))
-                entities.remove(i--);
+            if ((ge instanceof Unit && ((Unit)ge).health <= 0) || (ge instanceof Projectile && ((Projectile)ge).health <= 0)) {
+            	GameEntity ent = entities.remove(i--);
+            	if (ent instanceof Unit) ((Unit)ent).owner.units.remove(ent);
+            }
+       
         }
 
         // Check game end
@@ -87,6 +99,7 @@ public class GamePanel extends JPanel {
     public void removeUnit(Unit unit) {
         unit.owner.units.remove(unit);
         this.entities.remove(unit);
+        this.listener.selected.remove(unit);
     }
 
     public void pause() {
@@ -94,14 +107,34 @@ public class GamePanel extends JPanel {
         this.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 6));
         repaint();
     }
-
-<<<<<<< HEAD
-    // TODO: stuffs8
-=======
+    
     public void unpause() {
         this.paused = false;
         this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
         repaint();
     }
->>>>>>> fb72c08a023cfedffbe903efae922910eb7d8899
+    
+    public void setTargetsRelative(List<Unit> units, int addX, int addY) {
+    	for (Unit u : units) {
+            u.target = new Point( // Point offset from their original position
+                u.getX() + addX,
+                u.getY() + addY
+                );
+        }
+    }
+    
+    public void setTargetsRelativeTarget(List<Unit> units, int addX, int addY) {
+    	for (Unit u : units) {
+    		if (u.target == null) u.target = new Point(u.getX(),u.getY());
+            u.target = new Point( // Point offset from target
+                u.target.x + addX,
+                u.target.y + addY
+                );
+        }
+    }
+    
+    public void setTargets(List<Unit> units, int x, int y) {
+    	for (Unit u : units) u.target = new Point(x,y); // Absolute set
+    }
+    
 }

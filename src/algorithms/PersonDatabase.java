@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.BinaryTree;
+import utils.TreeNode;
 
 /**
  * @author Alexander Ng
@@ -104,9 +105,13 @@ public class PersonDatabase {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(String firstName, String lastName) {
-		return nameTree.getListOf(new ArrayList<Person>(), (Person p) -> {
-			return p.firstName.equals(firstName) && p.lastName.equals(lastName);
+		List<Person> list = new ArrayList<Person>();
+		nameTree.applyAll((TreeNode<Person> t) -> {
+			if (t.item.firstName.equals(firstName)
+				&& t.item.lastName.equals(lastName))
+				list.add(t.item);
 		});
+		return list;
 	}
 
 	/**
@@ -119,9 +124,16 @@ public class PersonDatabase {
 	 * @return a list of Person objects (possibly empty)
 	 */
 	public List<Person> find(int birthDay, int birthMonth, int birthYear) {
-		return dateTree.getListOf(new ArrayList<Person>(), (Person p) -> {
-			return p.birthDay==birthDay && p.birthMonth==birthMonth && p.birthYear==birthYear;
+		List<Person> list = new ArrayList<Person>();
+		nameTree.applyAll((TreeNode<Person> t) -> {
+			if (t.item.birthDay == birthDay
+				&& t.item.birthMonth == birthMonth
+				&& t.item.birthYear == birthYear)
+				list.add(t.item);
 		});
+		return list;
 	}
-
+	
+	public TreeNode<Person> getNameRoot() {return this.nameTree.root;}
+	public TreeNode<Person> getBDayRoot() {return this.dateTree.root;}
 }

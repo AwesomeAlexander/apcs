@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import graphics.drawings.Rect;
@@ -12,7 +13,7 @@ public class GameListener implements ActionListener, MouseListener, MouseMotionL
 
     GamePanel panel;
     GamePlayer player;
-    List<Unit> selected; // TODO: print to debug
+    List<Unit> selected;
     Point onclick;
     Rect selectionSquare;
     boolean spaceDown;
@@ -47,8 +48,7 @@ public class GameListener implements ActionListener, MouseListener, MouseMotionL
         }
 
         if (!selectedNew && this.selected != null) // Player clicked a spot without a unit - move selected units there
-            for (Unit u : this.selected)
-                u.setTarget(new Point(e.getX(),e.getY()));
+            panel.setTargets(this.selected, e.getX(),e.getY());
     }
 
     @Override
@@ -76,13 +76,8 @@ public class GameListener implements ActionListener, MouseListener, MouseMotionL
     public void mouseDragged(MouseEvent e) {
 
         if (spaceDown && selectionSquare == null) {
-            // Relative targetting
-            for (Unit u : this.selected) {
-                u.target = new Point( // Point offset from their original position
-                    u.getX() + (e.getX()-onclick.x),
-                    u.getY() + (e.getY()-onclick.y)
-                    );
-            }
+            // Relative targeting
+            panel.setTargetsRelative(this.selected, (e.getX()-onclick.x), (e.getY()-onclick.y));
         } else {
             // If there is a significant difference in position, make selectionSquare
             if (Math.abs(e.getX() - onclick.x) > 5 && Math.abs(e.getY() - onclick.y) > 5) {
@@ -95,14 +90,19 @@ public class GameListener implements ActionListener, MouseListener, MouseMotionL
             }
 
             if (selectionSquare != null) {
-                for (Unit u : player.units) {
-                    if (u.getX() >= selectionSquare.x
+            	// Manual foreach loop, as its causing errors - didn't fix
+                for (Iterator<Unit> iter = player.units.iterator();iter.hasNext();) {
+                	Unit u = iter.next();
+                    if (true // Coords in selection square
+                    	&& u.getX() >= selectionSquare.x
                         && u.getX() <= selectionSquare.x+selectionSquare.width
                         && u.getY() >= selectionSquare.y
-                        && u.getY() <= selectionSquare.y+selectionSquare.height)
-                        this.selected.add(u);
-                    else
+                        && u.getY() <= selectionSquare.y+selectionSquare.height) {
+                    	// Add if it isn't already
+                        if (!this.selected.contains(u)) this.selected.add(u);
+                    } else { // If not in square, remove
                         this.selected.remove(u);
+                    }
                 }
             }
         }
@@ -115,17 +115,46 @@ public class GameListener implements ActionListener, MouseListener, MouseMotionL
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) spaceDown = true;
+    	switch (e.getKeyCode()) {
+    	case KeyEvent.VK_SPACE:
+    		spaceDown = true;
+    		break;
+    	case KeyEvent.VK_UP:
+    		panel.setTargetsRelativeTarget(this.selected, 0, -5);
+    		break;
+    	case KeyEvent.VK_DOWN:
+    		panel.setTargetsRelativeTarget(this.selected, 0, 5);
+    		break;
+    	case KeyEvent.VK_LEFT:
+    		panel.setTargetsRelativeTarget(this.selected, -5, 0);
+    		break;
+    	case KeyEvent.VK_RIGHT:
+    		panel.setTargetsRelativeTarget(this.selected, 5, 0);
+    		break;
+    	case KeyEvent.VK_S:
+    		panel.setTargetsRelative(this.selected, 0, 0);
+    		break;
+    	case KeyEvent.VK_A:
+    		this.selected = player.units;
+    		break;
+    	case KeyEvent.VK_D:
+    		this.selected = new ArrayList<Unit>();
+    		break;
+    	}
+        //if (e.getKeyCode() == KeyEvent.VK_SPACE) spaceDown = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        spaceDown = false;
+        if (e.getKeyCode() == e.VK_SPACE) spaceDown = false;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+        	if (panel.paused) panel.unpause();
+    		else panel.pause();
+        }
     }
 
     @Override

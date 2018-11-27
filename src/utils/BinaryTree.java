@@ -44,7 +44,7 @@ public class BinaryTree<E extends Comparable<E>> {
 	}
 	*/
 
-	protected TreeNode<E> root;
+	public TreeNode<E> root;
 
 	public BinaryTree() {}
 	public BinaryTree(E rootItem) {this(new TreeNode<E>(rootItem));}
@@ -56,20 +56,28 @@ public class BinaryTree<E extends Comparable<E>> {
 	public boolean insert(E item,CompareTwo<E> comparer,boolean allowRepeats) {return insert(this.root,new TreeNode<E>(item),comparer,allowRepeats);}
 	public boolean insert(TreeNode<E> root,TreeNode<E> n,boolean allowRepeats) {return insert(root,n,(E a,E b)->a.compareTo(b),allowRepeats);}
 	public boolean insert(TreeNode<E> root,TreeNode<E> n,CompareTwo<E> comparer,boolean allowRepeats) {
-		if (this.root == null) {this.root=n;return true;} // TODO: fix problem of root being null
+		// System.out.println("\nPlacing "+n.item); // Debug
+		if (this.root == null) { // Null root
+			this.root=n; // TODO: Fix this.root to root
+			return true; // Is there a way to find the pointer passed in?? otherwise can't
+		}
+		
+		// Running through nodes
 		for (TreeNode<E> runner=root;;) {
-			if (comparer.compare(n.item,root.item) >= 0) {
-				if (!allowRepeats && n.item.equals(runner.item)) return false;
-
+			// System.out.println(n.item+(comparer.compare(n.item,runner.item)>=0?" > ":" < ")+runner.item); // Debug
+			if (!allowRepeats && n.item.equals(runner.item)) return false;
+			if (comparer.compare(n.item,runner.item) > 0) {
 				if (runner.right == null) {
 					runner.right = n;
+					// System.out.println("Putting "+n.item+" to the right of "+runner.item); // Debug
 					return true;
 				} else {
 					runner = runner.right;
 				}
-			} else {
+			} else { // Equalities go on the left if it allows repeats
 				if (runner.left == null) {
 					runner.left = n;
+					// System.out.println("Putting "+n.item+" to the left of "+runner.item); // Debug
 					return true;
 				} else {
 					runner = runner.left;
@@ -111,18 +119,10 @@ public class BinaryTree<E extends Comparable<E>> {
 	public void applyAll(Consumer<TreeNode<E>> doThis) {this.applyAll(this.root,doThis);}
 	public void applyAll(TreeNode<E> root,Consumer<TreeNode<E>> doThis) {
 		if (root == null) return;
+		//System.out.println(root+" has "+root.left+" and "+root.right);
 		applyAll(root.left, doThis);
 		doThis.accept(root);
 		applyAll(root.right, doThis);
-	}
-
-	// Get a list of items in the tree, determined by the predicate
-	public List<E> getListOf(List<E> list,Predicate<E> tester) {return this.getListOf(this.root, list, tester);}
-	public List<E> getListOf(TreeNode<E> root,List<E> list,Predicate<E> tester) {
-		this.applyAll(root, (TreeNode<E> n)->{
-			if (tester.test(n.item)) list.add(n.item);
-		});
-		return list;
 	}
 
 	// Do some function to a range
@@ -162,4 +162,26 @@ public class BinaryTree<E extends Comparable<E>> {
 		return this.complexSize(this.root, (TreeNode<E> e)->((String)e.item).length() );
 	}
 	
+	
+	@Override
+	public String toString() {
+		return print(this.root,0);
+	}
+	
+	private String print(TreeNode<E> root,int layer) {
+		String out = root.item.toString(), spacing = "";
+		for (int i=0;i<layer;i++) spacing+="  ";
+		if (root.left != null) out += "\n"+spacing+"L - "+print(root.left,layer+1);
+		if (root.right != null) out += "\n"+spacing+"R - "+print(root.right,layer+1);
+		return out;
+	}
+	
+	private String printFull(TreeNode<E> root,int layer) {
+		if (root==null) return null;
+		String out = root.item.toString(), spacing = "";
+		for (int i=0;i<layer;i++) spacing+="  ";
+		out += "\n"+spacing+"L - "+printFull(root.left,layer+1);
+		out += "\n"+spacing+"R - "+printFull(root.right,layer+1);
+		return out;
+	}
 }

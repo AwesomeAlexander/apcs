@@ -1,5 +1,6 @@
 package algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SortLibrary {
@@ -117,31 +118,32 @@ public class SortLibrary {
 		quickSort(nums,pivotInd+1,high);
 	}
 
-	// TODO: Fix.
 	public static void humanSort(int[] nums) {
-
-		int[] out = new int[nums.length];
+		int len = nums.length;
+		int[][] out = new int[len][];
 
 		// Find Min & Max
 		int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
 		for (int i=0;i<nums.length;i++) {
-			min = Math.min(nums[i],min);
-			max = Math.max(nums[i],max);
+			min = (min <= nums[i]) ? min : nums[i];
+			max = (max >= nums[i]) ? max : nums[i];
 		}
-		System.out.println("Found min as "+min+" and max as "+max);
+		int range = max-min;
 
-		System.out.println("Array indices range from 0 to "+(out.length-1));
+
+		System.out.println("Found min as "+min+" and max as "+max+", leaving range as "+range);
+		System.out.println("Array indices range from 0 to "+(len-1));
 
 		// Sorting
 		double place;
 		for (int i=0;i<nums.length;i++) {
 			// The place to put it is value out of range 0-1 then scaled to array length.
-			place = (1.0 * (nums[i]-min)/(max-min) * (nums.length-1));
+			place = (1.0 * (nums[i]-min)/(range) * (len-1));
 			System.out.println("Num: "+nums[i]+" | Old: "+i+" | New: "+place+" -> " + Math.round(place));
 			if (out[(int)Math.round(place)] != 0) {
 				out[(int)Math.round(place)] = nums[i];
 			} else {
-				// TODO: implement this
+				// TODO: implement this. would shuffle over others, maybe insertionsort it from i-1
 			}
 		}
 
